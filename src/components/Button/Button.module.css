@@ -11,14 +11,9 @@
     cursor: pointer;
 
     font-weight: bolder;
+    transition: 0.1s
 }
 
-.whiteButton {
-    color: white;
-    background-color: #51367C;
-}
-
-.purpleButton {
-    color: #51367C;
-    background-color: white;
+.button:hover {
+    scale: 1.1;
 }
