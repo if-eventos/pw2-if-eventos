@@ -3,19 +3,17 @@ import styles from './Button.module.css'
 
 type Props = {
     name: string,
-    color: string
+    color: string,
+    backgroundColor: string
 }
 
 
-export default function Button({name, color }:Props) {
+export default function Button({name, color, backgroundColor }:Props) {
     return (
         <button 
-        className={
-            `
-            ${styles.button} 
-            ${color === "WHITE" ? styles.whiteButton : styles.purpleButton}
-            `
-            }>
+        className={styles.button}
+        style={{color: color, backgroundColor: backgroundColor}}
+        >
             {name}
         </button>
     )

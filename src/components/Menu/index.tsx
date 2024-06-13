@@ -15,8 +15,8 @@ export default function Menu() {
 
 
         <div className={styles.rightMenu}>
-          <Button name='Login' color="WHITE" ></Button>
-          <Button name='Cadastre-se' color="PURPLE"></Button>
+          <Button name='Login' color="#51367C" backgroundColor="white" ></Button>
+          <Button name='Cadastre-se' color="white" backgroundColor="#51367C"></Button>
         </div>
       </div>
     );
