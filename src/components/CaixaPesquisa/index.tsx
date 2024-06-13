@@ -21,7 +21,10 @@ export default function CaixaPesquisa() {
 
 
   return (
-    <div className={focus ? styles.containerOnFocus : styles.container}>
+    <div className={`
+      ${styles.container}
+      ${ focus ? styles.containerOnFocus : null }
+    `}>
       <img src={lupa} alt="buscar" className='lupaImage' />
       <input
         onFocus={inputFocus}
