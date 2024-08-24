@@ -1,5 +1,5 @@
 import CaixaPesquisa from '../CaixaPesquisa';
-import Button from '../Button';
+import AuthButton from '../AuthButton';
 import logo from '../../assets/IF_logo_BLUElogo-if-eventos.svg';
 import styles from './Menu.module.css';
 
@@ -15,8 +15,12 @@ export default function Menu() {
 
 
         <div className={styles.rightMenu}>
-          <Button name='Login' color="#51367C" backgroundColor="white" ></Button>
-          <Button name='Cadastre-se' color="white" backgroundColor="#51367C"></Button>
+          <AuthButton type='login' >
+            Login
+          </AuthButton>
+          <AuthButton type='cadastrar'>
+            Cadastre-se
+          </AuthButton>
         </div>
       </div>
     );
