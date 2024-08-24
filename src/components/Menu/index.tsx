@@ -1,5 +1,8 @@
 import CaixaPesquisa from '../CaixaPesquisa';
-import AuthButton from '../AuthButton';
+import {
+  LoginButtonComp, 
+  CadastroButtonComp, 
+  SairButtonComp} from '../AuthButton';
 import logo from '../../assets/IF_logo_BLUElogo-if-eventos.svg';
 import { 
   AuthMenu,
@@ -41,20 +44,20 @@ export default function Menu() {
           {
             !!auth.user ? 
               (
-                <AuthButton type='logout' callback={handleLogoutButton}>
-                  <img src={sair} alt="Sair" />
+                <SairButtonComp callback={handleLogoutButton}>
                   Sair
-                </AuthButton>
+                  <img src={sair} alt="Sair" />
+                </SairButtonComp>
               )    
               :
               (
                 <>
-                <AuthButton type='login' callback={handleLoginButton}>
+                <LoginButtonComp callback={handleLoginButton}>
                   Login
-                </AuthButton>
-                <AuthButton type='cadastrar' callback={handleCadastroButton}>
+                </LoginButtonComp>
+                <CadastroButtonComp callback={handleCadastroButton}>
                   Cadastre-se
-                </AuthButton>
+                </CadastroButtonComp>
                 </>
               )
           }
