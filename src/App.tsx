@@ -11,8 +11,8 @@ function App() {
 
   return (
     <AuthProvider>
-      <Menu />
       <BrowserRouter>
+        <Menu />
         <Router />
       </BrowserRouter>
     </AuthProvider>
