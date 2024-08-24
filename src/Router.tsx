@@ -2,6 +2,7 @@ import { Route, Routes} from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 
 import Cadastro from './pages/Cadastro';
+import { Login } from './pages/Login';
 
 
 export function Router() {
@@ -13,7 +14,10 @@ export function Router() {
             {
                 !isLogged ?
                 (
+                    <>
+                    <Route path='/login' element={<Login />} />
                     <Route path='/cadastro' element={<Cadastro />} />
+                    </>
                 ) 
                 :
                 (

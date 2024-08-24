@@ -27,7 +27,7 @@ interface getUser {
 
 interface signinResponse {
     token: string,
-    idUser: string
+    userId: string
 }
 
 interface IAuthContext {
@@ -57,17 +57,14 @@ export function AuthProvider({children}:Props) {
             const response =  await api.post('/api/v1/user/signin', data)
 
             if (response.status === 200) {
-                const {token, idUser} = response.data as signinResponse
+                console.log(response.data)
+                const {token, userId} = response.data as signinResponse
                 api.defaults.headers.common.Authorization = `Bearer ${token}`
 
-                const getUserResponse = await api.get("/api/v1/user/", {
-                    params: {
-                        id: `${idUser}`
-                    }
-                })
-
+                const getUserResponse = await api.get(`api/v1/user/${userId}`)
+                
                 const userData = getUserResponse.data as getUser
-                const id = Number(idUser)
+                const id = Number(userId)
                 const user = {...userData, id:id}
                 setUser(user)
 
