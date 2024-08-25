@@ -3,6 +3,8 @@ import { useAuth } from './hooks/useAuth';
 
 import Cadastro from './pages/Cadastro';
 import Home from './pages/home';
+import EditarPerfil from './pages/Editar-Perfil';
+import DetalhesEvento from './pages/Detalhes-Evento';
 
 
 export function Router() {
@@ -17,6 +19,8 @@ export function Router() {
                     <>
                     <Route path='/cadastro' element={<Cadastro />} />
                     <Route path='/' element={<Home />} />
+                    <Route path='/edit-perfil' element={<EditarPerfil />} />
+                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
                     
                     </>
                 ) 
