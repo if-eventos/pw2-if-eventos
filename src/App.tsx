@@ -1,15 +1,22 @@
+import { BrowserRouter } from "react-router-dom"
+
 import Menu from "./components/Menu"
+import { AuthProvider } from "./context/AuthContext"
+import { Router } from "./Router"
+
 import './App.module.css'
-import Home from "./pages/home"
+
 
 
 function App() {
 
   return (
-    <>
+    <AuthProvider>
       <Menu />
-      <Home/>
-    </>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
