@@ -17,16 +17,21 @@ export function Router() {
                 !isLogged ?
                 (
                     <>
+
                     <Route path='/cadastro' element={<Cadastro />} />
                     <Route path='/' element={<Home />} />
-                    <Route path='/edit-perfil' element={<EditarPerfil />} />
-                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
+                    
                     
                     </>
                 ) 
                 :
                 (
-                    <></> // Substituir por pages que o usuario acessa quando esta logado
+                    <>
+
+                    <Route path='/editar-perfil' element={<EditarPerfil />} />
+                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
+
+                    </> // Substituir por pages que o usuario acessa quando esta logado
                 )
             }
         </Routes>
