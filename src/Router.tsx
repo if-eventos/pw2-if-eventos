@@ -20,7 +20,8 @@ export function Router() {
 
                     <Route path='/cadastro' element={<Cadastro />} />
                     <Route path='/' element={<Home />} />
-                    
+                    <Route path='/editar-perfil' element={<EditarPerfil />} />
+                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
                     
                     </>
                 ) 
@@ -28,8 +29,7 @@ export function Router() {
                 (
                     <>
 
-                    <Route path='/editar-perfil' element={<EditarPerfil />} />
-                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
+                    
 
                     </> // Substituir por pages que o usuario acessa quando esta logado
                 )

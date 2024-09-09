@@ -1,50 +1,49 @@
-import styles from './editar-perfil.module.css'
+import React from 'react';
+import { Main, Container, TitleConfig, Profile, AvatarProfile, ImgAvatar, InfoUser, Form, Botoes, BotaoCancelar, BotaoSalvar } from './StyledComponents';
 
 export default function EditarPerfil() {
     return (
-        <main>
-            <div className={styles.main}>
-                <div className={styles.container}>
-                    {/* Titutlo da página */}
-                    <h4 className={styles.titleconfig}>Configurações</h4>
+        <Main>
+            <Container>
+                {/* Título da página */}
+                <TitleConfig>Configurações</TitleConfig>
 
-                    <div className={styles.profile}>
-                            {/* Perfil e icon de editar foto */}
-                        <div className={styles.avatarProfile}>
-                            <img src="sua-imagem.png" className={styles.imgAvatar} alt="Foto de perfil" ></img>
-                            <img src="icone-editar.png" alt="Ee" className='iconEdit'></img>
-                        </div>
+                <Profile>
+                    {/* Perfil e ícone de editar foto */}
+                    <AvatarProfile>
+                        <img src="foto.jpg" alt="Foto de perfil" style={{height:'70px',borderRadius: '40px'}} />
+                        <img src="icone-editar.png" alt="Editar" style={{ position: 'absolute', bottom: '0', right: '0', width: '20px', height: '20px' }} />
+                    </AvatarProfile>
 
-                        {/* Informações do usuário */}
-                        <div className={styles.infoUser}>
-                            <p><strong>Thalyson Rian Mendes da Silva</strong></p>
-                            <p>Thalyson@gmail.com</p>
-                        </div>
-                    </div>
+                    {/* Informações do usuário */}
+                    <InfoUser>
+                        <p><strong>Thalyson Rian Mendes da Silva</strong></p>
+                        <p>Thalyson@gmail.com</p>
+                    </InfoUser>
+                </Profile>
 
-                    {/* Formulário para alterar informações do usuário */}
-                    <div className={styles.form}>
-                        <label>
-                            Nome
-                            <input style={{marginLeft: '36px'}} type='text' value="Thalyson Rian Mendes da Silva" />
-                        </label>
-                        <label>
-                            Email
-                            <input style={{marginLeft: '36px'}} type="email" value="Thalyson@gmail.com" />   
-                        </label>    
-                        <label>
-                            Telefone
-                            <input type="telefone" value="(83)998675926" />
-                        </label>
-                    </div>
+                {/* Formulário para alterar informações do usuário */}
+                <Form>
+                    <label>
+                        Nome
+                        <input type='text' value="Thalyson Rian Mendes da Silva" style={{ marginLeft: '36px' }} />
+                    </label>
+                    <label>
+                        Email
+                        <input type="email" value="Thalyson@gmail.com" style={{ marginLeft: '36px' }} />   
+                    </label>    
+                    <label>
+                        Telefone
+                        <input type="tel" value="(83)998675926" />
+                    </label>
+                </Form>
 
-                    {/* Botoes para cancelar e salvar alterações*/}
-                    <div className={styles.botoes}>
-                        <button className={styles.botaoCancelar}> Cancelar </button>
-                        <button className={styles.botaoSalvar}> Salvar Alterações</button>
-                    </div>
-                </div>
-            </div>
-        </main>
+                {/* Botões para cancelar e salvar alterações */}
+                <Botoes>
+                    <BotaoCancelar>Cancelar</BotaoCancelar>
+                    <BotaoSalvar>Salvar Alterações</BotaoSalvar>
+                </Botoes>
+            </Container>
+        </Main>
     )
 }
