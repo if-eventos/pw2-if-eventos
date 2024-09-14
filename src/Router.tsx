@@ -3,6 +3,7 @@ import { useAuth } from './hooks/useAuth';
 
 import Cadastro from './pages/Cadastro';
 import { Login } from './pages/Login';
+import CriarEventos from './pages/CriarEventos';
 
 
 export function Router() {
@@ -21,7 +22,9 @@ export function Router() {
                 ) 
                 :
                 (
-                    <></> // Substituir por pages que o usuario acessa quando esta logado
+                    <>
+                    <Route path='/criarevento' element={<CriarEventos />} />
+                    </> // Substituir por pages que o usuario acessa quando esta logado
                 )
             }
         </Routes>
