@@ -2,7 +2,8 @@ import CaixaPesquisa from '../CaixaPesquisa';
 import {
   LoginButtonComp, 
   CadastroButtonComp, 
-  SairButtonComp} from '../AuthButton';
+  SairButtonComp,
+  PageButtonComp} from '../AuthButton';
 import logo from '../../assets/IF_logo_BLUElogo-if-eventos.svg';
 import { 
   AuthMenu,
@@ -38,6 +39,19 @@ export default function Menu() {
 
           <CaixaPesquisa />
         </LeftMenu>
+
+        {
+          !!auth.user ?
+            (
+              <PageButtonComp callback={() => navigate('/criarevento')}>
+                criar evento
+              </PageButtonComp>
+            ) :
+            (
+              null
+            )
+        }
+        
 
         <AuthMenu>
 
