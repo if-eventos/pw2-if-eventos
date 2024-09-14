@@ -91,7 +91,7 @@ export function AuthProvider({children}:Props) {
         const user = localStorage.getItem('auth.user')
 
         if (token && user) {
-            api.defaults.headers.common.Authorization = token
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
             setUser(JSON.parse(user))
         }
     }, [])
