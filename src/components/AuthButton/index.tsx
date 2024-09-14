@@ -2,11 +2,20 @@ import {
     Button,
     LoginButton,
     CadastroButton, 
-    SairButton } from "./styles"
+    SairButton,
+    PageButton } from "./styles"
 
 type Props = {
     children: React.ReactNode,
     callback: () => void
+}
+
+export function PageButtonComp({children, callback }:Props) {
+    return (        
+        <PageButton onClick={callback} >
+            {children}
+        </PageButton>
+    )
 }
 
 

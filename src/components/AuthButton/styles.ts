@@ -19,6 +19,27 @@ export const Button = styled.button<{$type?: string; }>`
     }
 `;
 
+export const PageButton = styled.button`
+
+    color: #51367C;
+    background-color: white;
+
+    width: 107px;
+    height: 35px;
+    margin: 0px 7px;
+
+    border: none;
+    border-bottom: solid 2px #51367C;
+
+    cursor: pointer;
+    font-weight: bolder;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+`
+
+
 export const LoginButton = styled.button`
     color: white;
     background-color: #51367C;
