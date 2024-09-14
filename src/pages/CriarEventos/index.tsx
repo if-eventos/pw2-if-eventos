@@ -4,14 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
 
-type RequestBody = {
-    nome: string
-    descricao: string
-    data_hora: Date
-    urlsiteoficial: string
-    categoria: string
-}
-
 
 export default function CriarEventos() {
     const navigate = useNavigate()
