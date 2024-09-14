@@ -1,9 +1,9 @@
 import CaixaPesquisa from '../CaixaPesquisa';
 import {
-  LoginButtonComp, 
-  CadastroButtonComp, 
-  SairButtonComp,
-  PageButtonComp} from '../AuthButton';
+  LoginButton, 
+  CadastroButton, 
+  SairButton,
+  PageButton} from '../Buttons';
 import logo from '../../assets/IF_logo_BLUElogo-if-eventos.svg';
 import { 
   AuthMenu,
@@ -43,9 +43,9 @@ export default function Menu() {
         {
           !!auth.user ?
             (
-              <PageButtonComp callback={() => navigate('/criarevento')}>
+              <PageButton callback={() => navigate('/criarevento')}>
                 criar evento
-              </PageButtonComp>
+              </PageButton>
             ) :
             (
               null
@@ -58,20 +58,20 @@ export default function Menu() {
           {
             !!auth.user ? 
               (
-                <SairButtonComp callback={handleLogoutButton}>
+                <SairButton callback={handleLogoutButton}>
                   Sair
                   <img src={sair} alt="Sair" />
-                </SairButtonComp>
+                </SairButton>
               )    
               :
               (
                 <>
-                <LoginButtonComp callback={handleLoginButton}>
+                <LoginButton callback={handleLoginButton}>
                   Login
-                </LoginButtonComp>
-                <CadastroButtonComp callback={handleCadastroButton}>
+                </LoginButton>
+                <CadastroButton callback={handleCadastroButton}>
                   Cadastre-se
-                </CadastroButtonComp>
+                </CadastroButton>
                 </>
               )
           }

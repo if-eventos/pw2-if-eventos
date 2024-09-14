@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button<{$type?: string; }>`
+export const ButtonStyled = styled.button<{$type?: string; }>`
 
     color: ${props => props.$type === 'login' ? 'white' : '#51367C' };
     background-color: ${props => props.$type === 'login' ? '#51367C' : 'white'};
@@ -19,7 +19,7 @@ export const Button = styled.button<{$type?: string; }>`
     }
 `;
 
-export const PageButton = styled.button`
+export const PageButtonStyled = styled.button`
 
     color: #51367C;
     background-color: white;
@@ -40,7 +40,7 @@ export const PageButton = styled.button`
 `
 
 
-export const LoginButton = styled.button`
+export const LoginButtonStyled = styled.button`
     color: white;
     background-color: #51367C;
 
@@ -58,7 +58,7 @@ export const LoginButton = styled.button`
     }
 `
 
-export const CadastroButton = styled.button`
+export const CadastroButtonStyled = styled.button`
     color: #51367C;
     background-color: white;
 
@@ -76,7 +76,7 @@ export const CadastroButton = styled.button`
     }
 `
 
-export const SairButton = styled.button`
+export const SairButtonStyled = styled.button`
     color: #EA1919;
     background-color: transparent;
 
