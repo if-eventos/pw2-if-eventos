@@ -3,11 +3,15 @@ import { EventSchemaCreate, EventSchemaCreateType } from "../../utils/createEven
 import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+
+import { ImageUploader } from "../../components/ImageUploader"
 
 
 export default function CriarEventos() {
     const navigate = useNavigate()
-
+    const [image, setImage] = useState<File | undefined>()
+    
     const {
         register,
         handleSubmit,
@@ -18,13 +22,25 @@ export default function CriarEventos() {
 
 
     async function handleCreateEvent(data:EventSchemaCreateType) {
-        // const requestBody = {} as RequestBody
+        const requestBody = new FormData
+        requestBody.append('nome', data.nome)
+        requestBody.append('categoria', data.categoria)
+        requestBody.append('descricao', data.descricao)
+        requestBody.append('data_hora', data.data_hora)
+        requestBody.append('urlsiteoficial', data.urlsiteoficial)
 
+        if (image) {
+            requestBody.append('image', image)
+        }
+
+        console.log(requestBody)
         try {
             console.log(data)
-            const response = await api.post('api/v1/evento/criar', {
-                ...data 
-            })
+            const response = await api.post('api/v1/evento/criar',
+                requestBody,
+                {
+                    headers: {"Content-Type": "multipart/form-data"}
+                })
 
             console.log(response.status)
             navigate('/')
@@ -40,6 +56,10 @@ export default function CriarEventos() {
 
             <form style={{display: 'flex', flexDirection: 'column'}}
             onSubmit={handleSubmit(data => handleCreateEvent(data))}>
+
+                
+                <ImageUploader image={image} setImage={setImage} />
+
                 <input {...register("nome")} placeholder="nome"  />
                 {errors.nome?.message && <div>{errors.nome.message}</div>}
 
