@@ -6,17 +6,6 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ImageUploader } from "../../components/ImageUploader"
 
-type requestBody = {
-    name: string,
-    email: string,
-    password: string,
-    ehPalestrante: number,
-    telefone?: string,
-    minicurriculo?: string,
-    urlsite?: string,
-    curriculo_redesocial?: string,
-    image?: File
-}
 
 export default function Cadastro() {
     const navigate = useNavigate()
@@ -35,33 +24,31 @@ export default function Cadastro() {
 
     async function handleSignup(data:UserSchemaSignUpType) {
 
-        const requestBody = {} as requestBody
-        requestBody['name'] = data.name
-        requestBody['email'] = data.email
-        requestBody['password'] = data.password
+        const requestBody = new FormData
+        requestBody.append('name', data.name)
+        requestBody.append('email', data.email)
+        requestBody.append('password', data.password)
 
-        requestBody['ehPalestrante'] = togglePalestrante ? 1 : 0
+        const ehPalestrante = togglePalestrante ? 1 : 0;
+        requestBody.append('ehPalestrante', ehPalestrante.toString())
         if (data.telefone) {
-            requestBody['telefone'] = data.telefone
+            requestBody.append('telefone', data.telefone)
         }
         if (data.urlsite) {
-            requestBody['urlsite'] = data.urlsite
+            requestBody.append('urlsite', data.urlsite)
         }
         if (data.curriculo_redesocial) {
-            requestBody['curriculo_redesocial'] = data.curriculo_redesocial
+            requestBody.append('curriculo_redesocial', data.curriculo_redesocial)
         }
         if (data.minicurriculo) {
-            requestBody['minicurriculo'] = data.minicurriculo
+            requestBody.append('minicurriculo', data.minicurriculo)
         }
         if (image) {
-            requestBody['image'] = image
+            requestBody.append('image', image)
         }
  
-
         try {
-            const response = await api.post('api/v1/user/signup', {
-                ...requestBody 
-            }, {
+            const response = await api.post('api/v1/user/signup', requestBody, {
                 headers: {"Content-Type": "multipart/form-data"}
             })
 
