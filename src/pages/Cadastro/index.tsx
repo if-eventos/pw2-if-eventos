@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { ImageUploader } from "../../components/ImageUploader"
 
 type requestBody = {
     name: string,
@@ -13,13 +14,15 @@ type requestBody = {
     telefone?: string,
     minicurriculo?: string,
     urlsite?: string,
-    curriculo_redesocial?: string
+    curriculo_redesocial?: string,
+    image?: File
 }
 
 export default function Cadastro() {
     const navigate = useNavigate()
 
     const [togglePalestrante, setTogglePalestrante] =useState(false)
+    const [image, setImage] = useState<undefined | File>(undefined)
 
     const {
         register,
@@ -50,11 +53,16 @@ export default function Cadastro() {
         if (data.minicurriculo) {
             requestBody['minicurriculo'] = data.minicurriculo
         }
+        if (image) {
+            requestBody['image'] = image
+        }
  
 
         try {
             const response = await api.post('api/v1/user/signup', {
                 ...requestBody 
+            }, {
+                headers: {"Content-Type": "multipart/form-data"}
             })
 
             console.log(response.status)
@@ -74,6 +82,9 @@ export default function Cadastro() {
         <div >
             <form style={{display: 'flex', flexDirection: 'column'}}
              onSubmit={handleSubmit((data) => handleSignup(data))}>
+
+                <ImageUploader image={image} setImage={setImage} />
+
                 <input {...register("name")} placeholder="nome"  />
                 {errors.name?.message && <div>{errors.name.message}</div>}
 
