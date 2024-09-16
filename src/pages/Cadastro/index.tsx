@@ -53,7 +53,7 @@ export default function Cadastro() {
             })
 
             console.log(response.status)
-            navigate('/')
+            navigate('/login')
         } catch (error) {
             console.error(error)
         }
