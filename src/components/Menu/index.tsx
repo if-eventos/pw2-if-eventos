@@ -1,23 +1,82 @@
 import CaixaPesquisa from '../CaixaPesquisa';
-import Button from '../Button';
+import {
+  LoginButton, 
+  CadastroButton, 
+  SairButton,
+  PageButton} from '../Buttons';
 import logo from '../../assets/IF_logo_BLUElogo-if-eventos.svg';
-import styles from './Menu.module.css';
+import { 
+  AuthMenu,
+  LeftMenu,
+  Container } from './styles';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import sair from '../../assets/log-outsair.svg'
 
 
 export default function Menu() {
+  const auth = useContext(AuthContext)
+  const navigate = useNavigate()
+  
+    function handleLoginButton() {
+      navigate('/login')
+    }
+
+    function handleCadastroButton() {
+      navigate('/cadastro')
+    }
+
+    function handleLogoutButton() {
+      auth.deslogar()
+      navigate('/login')
+    }
+
     return (
-      <div className={styles.container}>
-        <div className={styles.leftMenu}>
+      <Container>
+        <LeftMenu >
           <img src={logo} alt="Home" />
 
           <CaixaPesquisa />
-        </div>
+        </LeftMenu>
 
+        {
+          !!auth.user ?
+            (
+              <PageButton callback={() => navigate('/criarevento')}>
+                criar evento
+              </PageButton>
+            ) :
+            (
+              null
+            )
+        }
+        
 
-        <div className={styles.rightMenu}>
-          <Button name='Login' color="#51367C" backgroundColor="white" ></Button>
-          <Button name='Cadastre-se' color="white" backgroundColor="#51367C"></Button>
-        </div>
-      </div>
+        <AuthMenu>
+
+          {
+            !!auth.user ? 
+              (
+                <SairButton callback={handleLogoutButton}>
+                  Sair
+                  <img src={sair} alt="Sair" />
+                </SairButton>
+              )    
+              :
+              (
+                <>
+                <LoginButton callback={handleLoginButton}>
+                  Login
+                </LoginButton>
+                <CadastroButton callback={handleCadastroButton}>
+                  Cadastre-se
+                </CadastroButton>
+                </>
+              )
+          }
+
+        </AuthMenu>
+      </Container>
     );
   }
