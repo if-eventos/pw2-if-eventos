@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Main, Container, TitleConfig, Profile, AvatarProfile, ImgAvatar, InfoUser, Form, Botoes, BotaoCancelar, BotaoSalvar } from './StyledComponents';
+import { api } from '../../api/axios';
+import { AuthContext } from '../../context/AuthContext';
 
-export default function EditarPerfil() {
+interface User{
+    name: string;
+    email: string;
+}
+
+export default function EditarPerfil(){
+    const auth = useContext(AuthContext); // Acessando o contexto de autenticação
+
     return (
         <Main>
             <Container>
@@ -11,14 +20,14 @@ export default function EditarPerfil() {
                 <Profile>
                     {/* Perfil e ícone de editar foto */}
                     <AvatarProfile>
-                        <img src="foto.jpg" alt="Foto de perfil" style={{height:'70px',borderRadius: '40px'}} />
-                        <img src="icone-editar.png" alt="Editar" style={{ position: 'absolute', bottom: '0', right: '0', width: '20px', height: '20px' }} />
+                        <img src={`${api.getUri()}${auth.user?.image}`} alt={'foto perfil'} style={{height:'70px',borderRadius: '50%', width: '70px'}} />
+                        <button style={{cursor: "pointer"}}><img src="icone-editar.png" alt="Editar" style={{ position: 'absolute', bottom: '0', right: '0', width: '20px', height: '20px' , color: 'white'}} /></button>
                     </AvatarProfile>
 
                     {/* Informações do usuário */}
                     <InfoUser>
-                        <p><strong>Thalyson Rian Mendes da Silva</strong></p>
-                        <p>Thalyson@gmail.com</p>
+                        <p><strong>{`${auth.user?.name}`}</strong></p>
+                        <p>{`${auth.user?.email}`}</p>
                     </InfoUser>
                 </Profile>
 
@@ -26,15 +35,15 @@ export default function EditarPerfil() {
                 <Form>
                     <label>
                         Nome
-                        <input type='text' value="Thalyson Rian Mendes da Silva" style={{ marginLeft: '36px' }} />
+                        <input type='text' value={auth.user?.name} style={{ marginLeft: '36px' }} />
                     </label>
                     <label>
                         Email
-                        <input type="email" value="Thalyson@gmail.com" style={{ marginLeft: '36px' }} />   
+                        <input type="email" value={auth.user?.email} style={{ marginLeft: '36px' }} />   
                     </label>    
                     <label>
                         Telefone
-                        <input type="tel" value="(83)998675926" />
+                        <input type="tel" value={auth.user?.telefone} />
                     </label>
                 </Form>
 

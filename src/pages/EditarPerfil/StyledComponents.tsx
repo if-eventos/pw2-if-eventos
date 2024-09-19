@@ -46,16 +46,16 @@ export const AvatarProfile = styled.div`
   position: relative;
   width: 70px;
   height: 70px;
-  border: 1px solid black;
   border-radius: 50%;
 `;
 
+
 export const ImgAvatar = styled.img`
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  border-radius: 10%;
+  width: 60px;
+  height: 60px;
   margin-right: 10px;
-  background-color: #ff0019;
+  background-color: white;
 `;
 
 export const InfoUser = styled.div`

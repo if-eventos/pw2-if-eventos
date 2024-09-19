@@ -63,7 +63,7 @@ export function AuthProvider({children}:Props) {
 
                 const getUserResponse = await api.get(`api/v1/user/${userId}`)
                 
-                const userData = getUserResponse.data as getUser
+                const userData = getUserResponse.data.user as getUser
                 const id = Number(userId)
                 const user = {...userData, id:id}
                 setUser(user)

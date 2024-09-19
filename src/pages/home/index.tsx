@@ -1,72 +1,128 @@
-// Home.tsx
-import React from 'react';
-import { HeaderContainer, CardContainer, CardImage, CardContent, CardTitle, CardInfo, GridContainer, SectionTitle, CardRow } from './styles';
+import React, { useEffect, useState } from 'react';
+import { HeaderContainer, CardContainer, CardImage, CardContent, CardTitle, CardInfo, GridContainer, SectionTitle } from './styles';
+import { api } from '../../api/axios';
 
-interface CardProps {
-  title: string;
-  date: string;
-  location: string;
+import { AiFillCalendar, AiFillFileText } from 'react-icons/ai';
+
+
+interface Event {
+  id: number;
+  nome: string;
+  descricao: string;
   image: string;
+  data_hora: string;
+  categoria: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, date, location, image }) => (
-  <CardContainer>
-    <CardImage src={image} alt={title} />
-    <CardContent>
-      <CardTitle>{title}</CardTitle>
-      <CardInfo>
-        📅 {date} <br />
-        📍 {location}
-      </CardInfo>
-    </CardContent>
-  </CardContainer>
-);
-
-interface CardGridProps {
-  title: string;
-  cards: Array<{
-    title: string;
-    date: string;
-    location: string;
-    image: string;
-  }>;
-}
-
-const CardGrid: React.FC<CardGridProps> = ({ title, cards }) => (
-  <GridContainer>
-    <SectionTitle>{title}</SectionTitle>
-    <CardRow>
-      {cards.map((card, index) => (
-        <Card key={index} {...card} />
-      ))}
-    </CardRow>
-  </GridContainer>
-);
-
-const Header: React.FC = () => (
-  <HeaderContainer>
-    <h1>Navegue pelos melhores eventos acadêmicos!</h1>
-    <p>
-      Viaje pelos Eventos Acadêmicos mais significativos do momento! De conferências internacionais
-      a simpósios locais, mergulhe em um oceano de descobertas, debates e inovações que estão
-      moldando o futuro da academia.
-    </p>
-  </HeaderContainer>
-);
 
 const Home: React.FC = () => {
-  const cardsData = [
-    { title: 'Semana do marketing', date: 'sábado, 16 maio', location: 'Cajazeiras, PB', image: '/background.png' },
-    { title: 'Introdução à área de exatas', date: 'terça-feira, 19 junho', location: 'João Pessoa, PB', image: '/foto.jpg' },
-    // Adicione mais cards conforme necessário
-  ];
+  const [eventos, setEventos] = useState<Event[]>([]);
+
+  const getEvento = async () => {
+    try {
+      const response = await api.get('/api/v1/evento/todos');
+      console.log('Dados da API:', response.data); // Verifique os dados no console
+      if (Array.isArray(response.data.evento)) {
+        setEventos(response.data.evento); // Acesse a chave correta
+      } else {
+        console.error('A resposta não contém um array chamado evento:', response.data);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar eventos:', error);
+    }
+  };
+  
+
+  useEffect(() => {
+    getEvento();
+  }, []); // Chama a função apenas uma vez quando o componente é montado
 
   return (
     <div>
-      <Header />
-      <CardGrid title="Destaques" cards={cardsData} />
-      <CardGrid title="Educação" cards={cardsData} />
-      <CardGrid title="Saúde" cards={cardsData} />
+      <HeaderContainer>
+        <h1>Navegue pelos melhores eventos acadêmicos!</h1>
+        <p>
+          Viaje pelos Eventos Acadêmicos mais significativos do momento! De conferências internacionais
+          a simpósios locais, mergulhe em um oceano de descobertas, debates e inovações que estão
+          moldando o futuro da academia.
+        </p>
+      </HeaderContainer>
+
+      <SectionTitle>Próximos Eventos</SectionTitle>
+      {eventos.length > 0 ? (
+        <GridContainer>
+          {eventos
+          .map(event => (
+            <CardContainer key={event.id}>
+              <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
+              <CardContent>
+                <CardTitle>{event.nome}</CardTitle>
+                <CardInfo>
+                  <AiFillCalendar /> {new Date(event.data_hora).toLocaleDateString()} <br />
+                  <AiFillFileText /> {event.descricao}
+                </CardInfo>
+              </CardContent>
+            </CardContainer>
+          ))}
+        </GridContainer>
+      ) : (
+        <p>Nenhum evento disponível</p>
+      )}
+
+
+      <SectionTitle>ADS</SectionTitle>
+      {eventos.length > 0 ? (
+        <GridContainer>
+          {eventos
+          .filter(event => event.categoria ==="ads")
+          .map(event => (
+            <CardContainer key={event.id}>
+              <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
+              <CardContent>
+                <CardTitle>{event.nome}</CardTitle>
+                <CardInfo>
+                  📆 {new Date(event.data_hora).toLocaleDateString()} <br />
+                  📝 {event.descricao}
+                </CardInfo>
+              </CardContent>
+            </CardContainer>
+          ))}
+        </GridContainer>
+      ) : (
+        <p>Nenhum evento disponível</p>
+      )}
+
+<SectionTitle>Matemática</SectionTitle>
+      {eventos.length > 0 ? (
+        <GridContainer>
+          {eventos
+          .filter(event => event.categoria ==="matematica")
+          .map(event => (
+            <CardContainer key={event.id}>
+              <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
+              <CardContent>
+                <CardTitle>{event.nome}</CardTitle>
+                <CardInfo>
+                  📅 {new Date(event.data_hora).toLocaleDateString()} <br />
+                  📝 {event.descricao}
+                </CardInfo>
+              </CardContent>
+            </CardContainer>
+          ))}
+        </GridContainer>
+      ) : (
+        <p>Nenhum evento disponível</p>
+      )}
+
+
+
+
+
+
+
+
+
+
     </div>
   );
 };

@@ -55,11 +55,15 @@ export const CardInfo = styled.div`
 `;
 
 export const GridContainer = styled.div`
-  padding: 20px;
-`;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 3%;
+  padding: 10px;
+  margin : 20px;
+  `;
 
 export const SectionTitle = styled.h2`
-  font-size: 20px;
+  font-size: 30px;
   margin: 20px 0;
   margin-left: 80px;
 `;
@@ -67,4 +71,14 @@ export const SectionTitle = styled.h2`
 export const CardRow = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+export const Botao = styled.button`
+  cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translate(10px, 20px);
+    }
+
 `;
