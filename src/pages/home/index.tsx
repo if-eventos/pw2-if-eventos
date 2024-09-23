@@ -1,41 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { HeaderContainer, CardContainer, CardImage, CardContent, CardTitle, CardInfo, GridContainer, SectionTitle } from './styles';
-import { api } from '../../api/axios';
-
-import { AiFillCalendar, AiFillFileText } from 'react-icons/ai';
-
-
-interface Event {
-  id: number;
-  nome: string;
-  descricao: string;
-  image: string;
-  data_hora: string;
-  categoria: string;
-}
+import React from 'react';
+import { HeaderContainer, SectionTitle, SectionContainer} from './styles';
+import AllEventos from '../../components/Evento/AllEventos';
+import EventosCategoria from '../../components/Evento/EventsCategoria';
 
 
 const Home: React.FC = () => {
-  const [eventos, setEventos] = useState<Event[]>([]);
-
-  const getEvento = async () => {
-    try {
-      const response = await api.get('/api/v1/evento/todos');
-      console.log('Dados da API:', response.data); // Verifique os dados no console
-      if (Array.isArray(response.data.evento)) {
-        setEventos(response.data.evento); // Acesse a chave correta
-      } else {
-        console.error('A resposta não contém um array chamado evento:', response.data);
-      }
-    } catch (error) {
-      console.error('Erro ao buscar eventos:', error);
-    }
-  };
-  
-
-  useEffect(() => {
-    getEvento();
-  }, []); // Chama a função apenas uma vez quando o componente é montado
 
   return (
     <div>
@@ -46,83 +15,19 @@ const Home: React.FC = () => {
           a simpósios locais, mergulhe em um oceano de descobertas, debates e inovações que estão
           moldando o futuro da academia.
         </p>
+      
       </HeaderContainer>
+      <SectionContainer>
+        {/* rendizar allEventos */}
+        <SectionTitle>Próximos Eventos</SectionTitle>
+        <AllEventos />
 
-      <SectionTitle>Próximos Eventos</SectionTitle>
-      {eventos.length > 0 ? (
-        <GridContainer>
-          {eventos
-          .map(event => (
-            <CardContainer key={event.id}>
-              <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
-              <CardContent>
-                <CardTitle>{event.nome}</CardTitle>
-                <CardInfo>
-                  <AiFillCalendar /> {new Date(event.data_hora).toLocaleDateString()} <br />
-                  <AiFillFileText /> {event.descricao}
-                </CardInfo>
-              </CardContent>
-            </CardContainer>
-          ))}
-        </GridContainer>
-      ) : (
-        <p>Nenhum evento disponível</p>
-      )}
-
-
-      <SectionTitle>ADS</SectionTitle>
-      {eventos.length > 0 ? (
-        <GridContainer>
-          {eventos
-          .filter(event => event.categoria ==="ads")
-          .map(event => (
-            <CardContainer key={event.id}>
-              <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
-              <CardContent>
-                <CardTitle>{event.nome}</CardTitle>
-                <CardInfo>
-                  📆 {new Date(event.data_hora).toLocaleDateString()} <br />
-                  📝 {event.descricao}
-                </CardInfo>
-              </CardContent>
-            </CardContainer>
-          ))}
-        </GridContainer>
-      ) : (
-        <p>Nenhum evento disponível</p>
-      )}
-
-<SectionTitle>Matemática</SectionTitle>
-      {eventos.length > 0 ? (
-        <GridContainer>
-          {eventos
-          .filter(event => event.categoria ==="matematica")
-          .map(event => (
-            <CardContainer key={event.id}>
-              <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
-              <CardContent>
-                <CardTitle>{event.nome}</CardTitle>
-                <CardInfo>
-                  📅 {new Date(event.data_hora).toLocaleDateString()} <br />
-                  📝 {event.descricao}
-                </CardInfo>
-              </CardContent>
-            </CardContainer>
-          ))}
-        </GridContainer>
-      ) : (
-        <p>Nenhum evento disponível</p>
-      )}
-
-
-
-
-
-
-
-
-
-
+        {/* rendizar Eventos por categoria. */}
+        <SectionTitle>Procure os eventos pelas Categorias</SectionTitle>
+        <EventosCategoria />
+      </SectionContainer>
+      
+      
     </div>
   );
 };
