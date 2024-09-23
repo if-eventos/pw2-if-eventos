@@ -72,9 +72,12 @@ export default function Menu() {
                   !!auth.user ?
                     (
                       <>
-                      <PageButton callback={() => navigate('/criarevento')}>
-                        criar evento
-                      </PageButton>
+                        <PageButton callback={() => navigate('/criarevento')}>
+                          criar evento
+                        </PageButton>
+                        <PageButton callback={() => navigate('/inscricoes')}>
+                          inscrições
+                        </PageButton>
                       </>
                     ) :
                     (
