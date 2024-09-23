@@ -32,8 +32,9 @@ export const Container = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 100%;
     max-height: 550px;
+    box-shadow: 0px 5px 20px 5px gray
   }
 
   @media (max-width: 480px) {
@@ -52,15 +53,19 @@ export const TitleConfig = styled.h4`
   max-width: 800px;
   border-radius: 6px 6px 0px 0px;
   margin-bottom: 40px;
+  text-align: center;
 
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 30px;
     padding: 10px;
+    width: 100%;
+    background-color: white;
+    color: black;
   }
 
   @media (max-width: 480px) {
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 18px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -102,7 +107,7 @@ export const InfoUser = styled.div`
   
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   margin-left: 100px;
   margin-bottom: 80px;
 
