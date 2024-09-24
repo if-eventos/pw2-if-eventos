@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Main, Container, TitleConfig, Profile, AvatarProfile, InfoUser, Form, Botoes, BotaoCancelar, BotaoSalvar } from './StyledComponents';
 import { api } from '../../api/axios';
 import { AuthContext } from '../../context/AuthContext';
@@ -7,18 +7,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchemaUpdate, UserSchemaUpdateType } from '../../utils/patchValidation';
 import { ImageUploader } from '../../components/ImageUploader';
 
-type FormValues = {
-    name?: string ;
-    email?: string;
-    telefone?: string;
-};
-
-
 
 export default function EditarPerfil() {
     const auth = useContext(AuthContext); // Acessando o contexto de autenticação
     const [image, setImage] = useState<File | undefined>(undefined); // Para manipular a imagem de perfil
-    const [cont, setCont] = useState(0);
 
     const { 
         register, 
@@ -38,21 +30,13 @@ export default function EditarPerfil() {
         }
     }, [auth.user, setValue]);
 
-    // Função para enviar os dados do formulário
-
-    const onSubmit: SubmitHandler<FormValues> = data => {
-        setCont(prevCont => prevCont + 1);
-        console.log('Formulário submetido');
-        console.log('Dados:', data);
-        console.log(`handleSubmit foi chamado ${cont + 1} vezes`);
-    };
-
-    console.log(`Componente renderizado ${cont} vezes`);
+    
 
     let callCount = 0;
     async function handleUpdate(data: UserSchemaUpdateType) { // Corrigido o tipo aqui
 
-        
+        console.log('URL base:', api.getUri());
+        console.log('Palestrantes:', auth);
 
 
         console.log('está entrando o handleUpdate')
