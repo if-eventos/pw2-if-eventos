@@ -11,7 +11,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f5f5f5;
-    padding: 20px;
   }
 `;
 
@@ -19,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 export const HeaderContainer = styled.header`
   align-items: center;
   margin-bottom: 20px;
-  witdh: 100%;
+  width: 100%;
   max-width: 1580px;
 `;
 
@@ -56,7 +55,7 @@ export const Title2 = styled.h1`
 `;
 
 export const globalContainer = styled.div`
-  max-witdh:70%
+  max-width:70%
 `;
 
 // Event Details
@@ -105,9 +104,11 @@ export const LocationContainer = styled.section`
 
 export const MapImage = styled.img`
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
+  height: 400px;
   margin: 0 auto;
   border-radius: 8px;
+  box-shadow: 0px 0px 6px 1px gray;
 `;
 
 // Speakers

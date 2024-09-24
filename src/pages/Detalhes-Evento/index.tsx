@@ -1,5 +1,5 @@
 // src/App.tsx
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   GlobalStyle,
   HeaderContainer,
@@ -13,76 +13,106 @@ import {
   MapImage,
   SpeakersContainer,
   SpeakerList,
-  SpeakerCard,
-  SpeakerImage,
-  SpeakerName,
   Title2,
   TitleButtonContainer,
-  globalContainer,
 } from './styles';
+import { api } from '../../api/axios';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
-const App: React.FC = () => {
+interface Palestrante {
+  id: number;
+  name: string;
+  image: string;
+}
+
+interface Event {
+  id: number;
+  nome: string;
+  descricao: string;
+  image: string;
+  data_hora: string;
+  categoria: string;
+}
+
+export default function DetalhesEvento() {
+  const auth = useContext(AuthContext);
+  const { id } = useParams(); 
+  const [palestrantes, setPalestrantes] = useState<Palestrante[]>([]);
+  const [evento, setEvento] = useState<Event | null>(null);
+
+  useEffect(() => {
+    const fetchEvento = async () => {
+      try {
+        // Buscar detalhes do evento
+        const response = await api.get(`/api/v1/evento/todos/${id}`);
+        setEvento(response.data.evento);
+
+        // Buscar palestrantes do evento
+        const responsePalestra = await api.get(`/api/v1/palestrante/readAll/${id}`);
+        setPalestrantes(responsePalestra.data.palestrantes || []); // Garante um array vazio se não houver palestrantes
+
+        console.log('URL base:', api.getUri());
+        console.log('Palestrantes:', responsePalestra.data.palestrantes);
+        
+      } catch (error) {
+        console.error("Erro ao buscar o evento ou palestrantes:", error);
+      }
+    };
+
+    if (id) {
+      fetchEvento();
+    }
+  }, [id]);
+
+  if (!evento) {
+    return <div>Carregando detalhes do evento...</div>;
+  }
+
   return (
     <>
       <GlobalStyle />
       <HeaderContainer>
-        <Image src="/events.png" alt="Banner" />
-        <Date>Terça-feira, 19 de junho</Date>
+        <Image src={`${api.getUri()}${evento.image}`} alt={evento.nome} />
+        <Date>{evento.data_hora}</Date>
         <TitleButtonContainer>
-          <Title>Introdução à área de exatas</Title>
+          <Title>{evento.nome}</Title>
           <JoinButton>Participar</JoinButton>
         </TitleButtonContainer>
-        <Title2>Sobre o Evento</Title2> 
+        <Title2>Sobre o Evento</Title2>
       </HeaderContainer>
 
       <EventContainer>
-        <Description>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. NullaLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.
-            quis sem at nibh elementum imperdiet.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.
-          </p>
-        </Description>
-        
+        <Description>{evento.descricao}</Description>
       </EventContainer>
 
       <LocationContainer>
-        <h2>Localização</h2>
-        <MapImage src="OIP.jfif" alt="Localização do evento" />
-        <p>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
+        <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>Localização</h2>
+        <MapImage src="../public/OIP.jfif" alt="Localização do evento" />
+        <p style={{ margin: '10px' }}>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
       </LocationContainer>
 
       <SpeakersContainer>
         <h2>Palestrantes</h2>
         <SpeakerList>
-          <SpeakerCard>
-            <SpeakerImage src="speaker1.jpg" alt="Pedro Neto" />
-            <SpeakerName>Pedro Neto</SpeakerName>
-          </SpeakerCard>
-          <SpeakerCard>
-            <SpeakerImage src="speaker2.jpg" alt="Jhonatan Lira" />
-            <SpeakerName>Jhonatan Lira</SpeakerName>
-          </SpeakerCard>
-          <SpeakerCard>
-            <SpeakerImage src="speaker3.jpg" alt="Fábio Nogueira" />
-            <SpeakerName>Fábio Nogueira</SpeakerName>
-          </SpeakerCard>
+          {palestrantes.length > 0 ? (
+            palestrantes.map((palestrante) => (
+              <div key={palestrante.id}>
+                {/* Aqui exibimos a imagem e nome do palestrante */}
+                <img
+                  src={`${api.getUri()}${palestrante.image}`}
+                  alt={`Foto de ${palestrante.name}`}
+                  style={{ width: '200px', height: '150px' }}
+                />
+
+                <p>{palestrante.name}</p>
+              </div>
+            ))
+          ) : (
+            <p>Nenhum palestrante disponível</p>
+          )}
         </SpeakerList>
       </SpeakersContainer>
     </>
   );
-};
-
-export default App;
+}
