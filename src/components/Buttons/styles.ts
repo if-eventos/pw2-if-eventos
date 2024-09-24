@@ -38,12 +38,16 @@ export const PageButtonStyled = styled.button`
         transform: scale(1.1);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 810px) {
 
         margin: 0px;
         width: 100%;
         text-align: left;
         padding-left: 20px;
+
+        &:hover {
+            transform: none;
+        }
     }
 `
 
