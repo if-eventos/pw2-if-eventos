@@ -5,6 +5,7 @@ import { api } from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ImageUploader } from "../../components/ImageUploader"
+import { SubmitButton } from "../../components/Buttons"
 
 
 export default function Cadastro() {
@@ -97,7 +98,9 @@ export default function Cadastro() {
                     onClick={handlePalestrante} />
                 <label htmlFor="ehPalestrante">Sou Palestrante?</label>
 
-                <button type="submit">Criar Conta!</button>
+                <SubmitButton>
+                    Criar Conta!
+                </SubmitButton>
             </form>
 
             <div>
