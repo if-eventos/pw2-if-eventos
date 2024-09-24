@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { LoginContainer,
          FormStyled } from "./styles"
 import { InputStyled } from "../../components/Input"
+import { SubmitButton } from "../../components/Buttons"
 
 import icon_email from "../../assets/icon_email.png"
 import icon_password from "../../assets/icon_password.png"
@@ -54,8 +55,10 @@ export function Login() {
                 type="password"
                 $iconPath={icon_password} />
                 {errors.password?.message && <div>{errors.password.message}</div>}
-
-                <button type="submit">Entrar!</button>
+ 
+                <SubmitButton>
+                    Login
+                </SubmitButton>
             </FormStyled>
 
             <div>

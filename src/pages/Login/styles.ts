@@ -15,6 +15,7 @@ export const LoginContainer = styled.div`
 export const FormStyled = styled.form`
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     row-gap: 20px;
 `
