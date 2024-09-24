@@ -12,29 +12,20 @@ import {
   OpenMenu,
   ButtonsContainer,
   PagesContainer } from './styles';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import sair from '../../assets/log-outsair.svg'
+import {
+  useWindowWidth
+} from '@react-hook/window-size'
 
 
 export default function Menu() {
-  const [width, setWidth] = useState(window.innerWidth);
-  
-  useEffect(() => {
-
-    const handleResize = () => setWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-
-  }, []);
-
-
   const auth = useContext(AuthContext)
   const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
+  const width = useWindowWidth()
   
     function handleLoginButton() {
       navigate('/login')
@@ -64,7 +55,7 @@ export default function Menu() {
         
 
         {
-          width > 810 || !!isOpen ?
+          (width > 810 || isOpen) &&
           (
             <ButtonsContainer>
               <PagesContainer>
@@ -113,10 +104,6 @@ export default function Menu() {
                 }
               </AuthContent>
             </ButtonsContainer>
-          )
-          :
-          (
-            null
           )
         }
       </Container>
