@@ -7,6 +7,7 @@ import CriarEventos from './pages/CriarEventos';
 import Home from './pages/home';
 import EditarPerfil from './pages/EditarPerfil';
 import DetalhesEvento from './pages/Detalhes-Evento';
+import Inscricoes from './pages/Inscricoes';
 
 
 export function Router() {
@@ -33,6 +34,7 @@ export function Router() {
                     <Route path='/editar-perfil' element={<EditarPerfil />} />
                     <Route path='/detalhes-evento/:id' element={<DetalhesEvento/>} />
                     <Route path='/criarevento' element={<CriarEventos />} />
+                    <Route path='/inscricoes' element={<Inscricoes />} />
                     </> // Substituir por pages que o usuario acessa quando esta logado
                 )
             }

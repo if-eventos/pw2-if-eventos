@@ -37,6 +37,14 @@ export const PageButtonStyled = styled.button`
     &:hover {
         transform: scale(1.1);
     }
+
+    @media (max-width: 768px) {
+
+        margin: 0px;
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+    }
 `
 
 
@@ -96,5 +104,28 @@ export const SairButtonStyled = styled.button`
     &:hover {
         border-bottom: solid 3px #EA1919;
         transform: scale(1.1);
+    }
+`
+
+
+export const SubmitButtonStyled = styled.button`
+    cursor: pointer;
+
+    width: 250px;
+    height: 40px;
+
+    font-size: medium;
+    font-weight: bold;
+
+    border: solid 0px;
+    border-radius: 8px;
+
+    background-color: #455881;
+    color: aliceblue;
+
+
+    transition: 0.4s;
+    &:hover {
+        background-color: #556B9A;
     }
 `
