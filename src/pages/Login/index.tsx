@@ -3,8 +3,14 @@ import { useForm } from "react-hook-form"
 import { UserSchemaSignIn, UserSchemaSignInType } from "../../utils/signinValidation"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
+import { LoginContainer,
+         FormStyled } from "./styles"
+import { InputStyled } from "../../components/Input"
+
+import icon_email from "../../assets/icon_email.png"
+import icon_password from "../../assets/icon_password.png"
+
 
 
 export function Login() {
@@ -35,23 +41,27 @@ export function Login() {
 
 
 
-        <div>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-            onSubmit={handleSubmit((data) => handleSignin(data))}>
+        <LoginContainer>
+            <FormStyled onSubmit={handleSubmit((data) => handleSignin(data))}>
 
-                <input {...register("email")} placeholder="email" />
+                <InputStyled {...register("email")} 
+                placeholder="email" 
+                $iconPath={icon_email} />
                 {errors.email?.message && <div>{errors.email.message}</div>}
 
-                <input {...register("password")} placeholder="senha" type="password"/>
+                <InputStyled {...register("password")} 
+                placeholder="senha" 
+                type="password"
+                $iconPath={icon_password} />
                 {errors.password?.message && <div>{errors.password.message}</div>}
 
                 <button type="submit">Entrar!</button>
-            </form>
+            </FormStyled>
 
             <div>
                 <p>você já possui uma conta?</p>
                 <p>Acesse ela por <a href="#">aqui</a></p>
             </div>
-        </div>
+        </LoginContainer>
     )
 }
