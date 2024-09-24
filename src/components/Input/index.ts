@@ -18,6 +18,10 @@ export const InputStyled = styled.input<{ $iconPath: string }>`
     font-size: medium;
 
     @media (max-width: 810px) {
+        width: 50vw;
+    }
+
+    @media (max-width: 480px) {
         width: 80vw;
     }
 `
