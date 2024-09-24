@@ -72,6 +72,9 @@ export default function Menu() {
                   !!auth.user ?
                     (
                       <>
+                        <PageButton callback={() => navigate('/')}>
+                          Home
+                        </PageButton>
                         <PageButton callback={() => navigate('/criarevento')}>
                           criar evento
                         </PageButton>
