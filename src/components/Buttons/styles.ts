@@ -106,3 +106,26 @@ export const SairButtonStyled = styled.button`
         transform: scale(1.1);
     }
 `
+
+
+export const SubmitButtonStyled = styled.button`
+    cursor: pointer;
+
+    width: 250px;
+    height: 40px;
+
+    font-size: medium;
+    font-weight: bold;
+
+    border: solid 0px;
+    border-radius: 8px;
+
+    background-color: #455881;
+    color: aliceblue;
+
+
+    transition: 0.4s;
+    &:hover {
+        background-color: #556B9A;
+    }
+`

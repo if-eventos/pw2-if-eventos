@@ -3,7 +3,8 @@ import {
     LoginButtonStyled,
     CadastroButtonStyled, 
     SairButtonStyled,
-    PageButtonStyled } from "./styles"
+    PageButtonStyled,
+    SubmitButtonStyled } from "./styles"
 
 type Props = {
     children: React.ReactNode,
@@ -48,5 +49,18 @@ export function SairButton({children, callback}:Props) {
         <SairButtonStyled onClick={callback} >
             {children}
         </SairButtonStyled>
+    )
+}
+
+
+type SubmitProps = {
+    children:React.ReactNode
+}
+
+export function SubmitButton({children}:SubmitProps) {
+    return (
+        <SubmitButtonStyled type="submit">
+            {children}
+        </SubmitButtonStyled>
     )
 }
