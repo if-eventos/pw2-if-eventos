@@ -19,7 +19,6 @@ export const HeaderContainer = styled.header`
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
-  max-width: 1580px;
 `;
 
 export const Image = styled.img`
