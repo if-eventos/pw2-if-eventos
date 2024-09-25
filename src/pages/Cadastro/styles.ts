@@ -39,3 +39,14 @@ export const Text = styled.p`
 
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
+
+
+export const TextAreaMinicurriculo = styled.textarea`
+    width: 250px;
+    height: 100px;
+    resize: none;
+
+    &::placeholder {
+        background-color: #D4DCFF;
+    }
+`

@@ -10,7 +10,8 @@ import { InputStyled } from "../../components/Input"
 import { Container, 
         FormStyled,
         Aviso,
-        Text } from "./styles"
+        Text,
+        TextAreaMinicurriculo } from "./styles"
 
 import icon_email from "../../assets/icon_email.png"
 import icon_password from "../../assets/icon_password.png"
@@ -103,7 +104,7 @@ export default function Cadastro() {
                 <InputStyled $iconPath={icon_password} {...register("password")} placeholder="senha" type="password"/>
                 {errors.password?.message && <div>{errors.password.message}</div>}
 
-                <input {...register("minicurriculo")} placeholder="Escreva um pouco sobre você:" />
+                <TextAreaMinicurriculo {...register("minicurriculo")} placeholder="Escreva um pouco sobre você:" />
                 {errors.minicurriculo?.message && <div>{errors.minicurriculo.message}</div>}
 
                 <input type="checkbox" name="ehPalestrante" id="ehPalestrante"
