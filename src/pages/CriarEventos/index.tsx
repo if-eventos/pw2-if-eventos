@@ -9,6 +9,7 @@ import {
     Container,
     FormStyled
  } from "./styles"
+import { SubmitButton } from "../../components/Buttons"
 
 import { ImageUploader } from "../../components/ImageUploader"
 import { InputStyled } from "../../components/Input"
@@ -87,7 +88,9 @@ export default function CriarEventos() {
                 <InputStyled $iconPath={icon_graduation_cap} {...register("categoria")} placeholder="categoria" />
                 {errors.categoria?.message && <div>{errors.categoria.message}</div>}
 
-                <button type="submit">Criar Evento!</button>
+                <SubmitButton>
+                    Criar Evento!
+                </SubmitButton>
             </FormStyled>
         </Container>
     )
