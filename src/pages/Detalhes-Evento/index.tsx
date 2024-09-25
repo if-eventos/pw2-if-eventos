@@ -19,7 +19,8 @@ import {
 import { api } from '../../api/axios';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 
 interface Palestrante {
@@ -113,12 +114,15 @@ export default function DetalhesEvento() {
       //Aqui ele vai verificar se o array é de fato um array/matriz :D
       if (Array.isArray(users)) {
         setParticipantes(users);
+        setParticipando(true);
+        toast.success('Você está participando do evento!');
         console.log('Participantes após inscrição:', users);
       } else {
         console.error('error:', response.data);
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
+      toast.error('Erro ao tentar participar do evento.'); 
     }
   };
 
@@ -132,10 +136,12 @@ export default function DetalhesEvento() {
 
       if (Array.isArray(users)) {
         setParticipantes(users);
-        setParticipando(true);  // Atualiza o estado de participação
+        setParticipando(false);  // Atualiza o estado de participação
+        toast.info('Você saiu do evento.');
       }
     } catch (error) {
       console.error('Erro ao sair do evento:', error);
+      toast.error('Erro ao tentar sair do evento.'); 
     }
   };
 
@@ -143,6 +149,7 @@ export default function DetalhesEvento() {
     <>
       <GlobalStyle />
       <HeaderContainer>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover />
         <Image src={`${api.getUri()}${evento.image}`} alt={evento.nome} />
         <Date>{evento.data_hora}</Date>
         <TitleButtonContainer>
