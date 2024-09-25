@@ -1,5 +1,5 @@
 // src/App.tsx
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   GlobalStyle,
   HeaderContainer,
@@ -18,7 +18,6 @@ import {
 } from './styles';
 import { api } from '../../api/axios';
 import { useParams } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
 
 interface Palestrante {
   id: number;
@@ -36,7 +35,6 @@ interface Event {
 }
 
 export default function DetalhesEvento() {
-  const auth = useContext(AuthContext);
   const { id } = useParams(); 
   const [palestrantes, setPalestrantes] = useState<Palestrante[]>([]);
   const [evento, setEvento] = useState<Event | null>(null);
