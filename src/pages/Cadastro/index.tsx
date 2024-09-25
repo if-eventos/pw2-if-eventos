@@ -8,7 +8,9 @@ import { ProfilePictureUploader } from "../../components/ImageUploader"
 import { SubmitButton } from "../../components/Buttons"
 import { InputStyled } from "../../components/Input"
 import { Container, 
-        FormStyled } from "./styles"
+        FormStyled,
+        Aviso,
+        Text } from "./styles"
 
 import icon_email from "../../assets/icon_email.png"
 import icon_password from "../../assets/icon_password.png"
@@ -113,10 +115,10 @@ export default function Cadastro() {
                 </SubmitButton>
             </FormStyled>
 
-            <div>
-                <p>você já possui uma conta?</p>
-                <p>Acesse ela por <a href="#">aqui</a></p>
-            </div>
+            <Aviso>
+                <Text>você já possui uma conta?</Text>
+                <Text>Acesse ela por <a href="#" onClick={() => navigate('/login')}>aqui</a></Text>
+            </Aviso>
         </Container>
     )
 }

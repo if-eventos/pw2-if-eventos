@@ -20,4 +20,19 @@ export const FormStyled = styled.form`
     row-gap: 20px;
 `
 
+export const Aviso = styled.div`
+    width: 250px;
+    
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 
+    margin-top: 20px;
+`
+
+export const Text = styled.p`
+    font-weight: bold;
+    font-size: small;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`

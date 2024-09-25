@@ -5,7 +5,9 @@ import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { LoginContainer,
-         FormStyled } from "./styles"
+         FormStyled,
+         Aviso,
+         Text } from "./styles"
 import { InputStyled } from "../../components/Input"
 import { SubmitButton } from "../../components/Buttons"
 
@@ -61,10 +63,10 @@ export function Login() {
                 </SubmitButton>
             </FormStyled>
 
-            <div>
-                <p>você já possui uma conta?</p>
-                <p>Acesse ela por <a href="#">aqui</a></p>
-            </div>
+            <Aviso>
+                <Text>Não possui uma conta?</Text>
+                <Text>Crie uma <a href="#" onClick={() => navigate('/cadastro')}>aqui</a></Text>
+            </Aviso>
         </LoginContainer>
     )
 }
