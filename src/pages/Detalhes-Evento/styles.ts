@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5;
   }
 `;
 
@@ -23,7 +22,7 @@ export const HeaderContainer = styled.header`
 
 export const Image = styled.img`
   width: 100%;
-  max-height: 300px;
+  max-height: 350px;
   object-fit: cover;
   border-radius: 8px;
 `;
@@ -89,10 +88,23 @@ export const JoinButton = styled.button`
   font-size: 16px;
   margin-right: 140px;
 
-
   &:hover {
     background-color: #218838;
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width: 75px;
+    text-align: left;
+    margin-right: 10px;
+    
+  }
+
+  @media (max-width: 480px) {
+    font-size:12px;
+
+  }
+
 `;
 
 // Location

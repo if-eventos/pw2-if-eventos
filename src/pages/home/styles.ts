@@ -16,13 +16,12 @@ export const HeaderContainer = styled.body`
   text-align: center;
 
   @media (max-width: 768px) {
-    font-size: 12px;
-    background-image: url('');
+    font-size: 10px;
   }
 
   @media (max-width: 480px) {
-    padding: 1px;
-    background-image: url('');
+    font-size:10px;
+
   }
 
   
@@ -31,9 +30,16 @@ export const HeaderContainer = styled.body`
 
 export const ImageContainer = styled.div`
   width: 100%;
-  height: 400px; /* Ajuste a altura conforme necessário */
+  height: 200px; /* Ajuste a altura conforme necessário */
 
-  
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1px;
+
+  }
 `;
 
 

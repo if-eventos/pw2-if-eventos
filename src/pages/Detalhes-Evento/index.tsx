@@ -21,6 +21,7 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import { motion } from 'framer-motion';
 
 
 interface Palestrante {
@@ -147,54 +148,56 @@ export default function DetalhesEvento() {
 
   return (
     <>
-      <GlobalStyle />
-      <HeaderContainer>
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover />
-        <Image src={`${api.getUri()}${evento.image}`} alt={evento.nome} />
-        <Date>{evento.data_hora}</Date>
-        <TitleButtonContainer>
-          <Title>{evento.nome}</Title>
-          {participando ? (
-              <JoinButton onClick={sairDoEvento}>Sair</JoinButton>
+    <motion.div initial={{x: 1000}} animate={{x: 0}} exit={{x: window.innerWidth}} style={{width: '100%'}}>
+        <GlobalStyle />
+        <HeaderContainer>
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover />
+          <Image src={`${api.getUri()}${evento.image}`} alt={evento.nome} />
+          <Date>{evento.data_hora}</Date>
+          <TitleButtonContainer>
+            <Title>{evento.nome}</Title>
+            {participando ? (
+                <JoinButton onClick={sairDoEvento} style={{backgroundColor: 'red'}}>Sair</JoinButton>
+              ) : (
+                <JoinButton onClick={participarDoEvento}>Participar</JoinButton>
+              )}
+            
+          </TitleButtonContainer>
+          <Title2>Sobre o Evento</Title2>
+        </HeaderContainer>
+
+        <EventContainer>
+          <Description>{evento.descricao}</Description>
+        </EventContainer>
+
+        <LocationContainer>
+          <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>Localização</h2>
+          <MapImage src="../public/OIP.jfif" alt="Localização do evento" />
+          <p style={{ margin: '10px' }}>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
+        </LocationContainer>
+
+        <SpeakersContainer>
+          <h2>Palestrantes</h2>
+          <SpeakerList>
+            {palestrantes.length > 0 ? (
+              palestrantes.map((palestrante) => (
+                <div key={palestrante.id}>
+                  {/* Aqui exibimos a imagem e nome do palestrante */}
+                  <img
+                    src={`${api.getUri()}${palestrante.image}`}
+                    alt={`Foto de ${palestrante.name}`}
+                    style={{ width: '200px', height: '200px' }}
+                  />
+
+                  <p>{palestrante.name}</p>
+                </div>
+              ))
             ) : (
-              <JoinButton onClick={participarDoEvento}>Participar</JoinButton>
+              <p>Nenhum palestrante disponível</p>
             )}
-          
-        </TitleButtonContainer>
-        <Title2>Sobre o Evento</Title2>
-      </HeaderContainer>
-
-      <EventContainer>
-        <Description>{evento.descricao}</Description>
-      </EventContainer>
-
-      <LocationContainer>
-        <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>Localização</h2>
-        <MapImage src="../public/OIP.jfif" alt="Localização do evento" />
-        <p style={{ margin: '10px' }}>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
-      </LocationContainer>
-
-      <SpeakersContainer>
-        <h2>Palestrantes</h2>
-        <SpeakerList>
-          {palestrantes.length > 0 ? (
-            palestrantes.map((palestrante) => (
-              <div key={palestrante.id}>
-                {/* Aqui exibimos a imagem e nome do palestrante */}
-                <img
-                  src={`${api.getUri()}${palestrante.image}`}
-                  alt={`Foto de ${palestrante.name}`}
-                  style={{ width: '200px', height: '150px' }}
-                />
-
-                <p>{palestrante.name}</p>
-              </div>
-            ))
-          ) : (
-            <p>Nenhum palestrante disponível</p>
-          )}
-        </SpeakerList>
-      </SpeakersContainer>
+          </SpeakerList>
+        </SpeakersContainer>
+      </motion.div>
     </>
   );
 }

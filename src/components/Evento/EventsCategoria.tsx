@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { CardContainer, CardImage, CardContent, CardTitle, CardInfo, GridContainer, SectionTitle } from './styles';
 import { api } from '../../api/axios';
 import { AiFillCalendar, AiFillFileText } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+
 
 interface Event {
   id: number;
@@ -15,6 +17,7 @@ interface Event {
 
 const EventosCategoria: React.FC = () => {
   const [eventos, setEventos] = useState<Event[]>([]);
+  const navigate = useNavigate();
 
   const getEvento = async () => {
     try {
@@ -33,6 +36,10 @@ const EventosCategoria: React.FC = () => {
     getEvento();
   }, []);
 
+  const handleEventoClick = (id: number) =>{
+    navigate(`detalhes-evento/${id}`);
+  }
+
   return (
     <div>
             <SectionTitle>Eventos de ADS</SectionTitle>
@@ -42,7 +49,7 @@ const EventosCategoria: React.FC = () => {
                 {eventos
                 .filter(event => event.categoria ==="ads")
                 .map(event => (
-                    <CardContainer key={event.id}>
+                    <CardContainer key={event.id} onClick={() => handleEventoClick(event.id)}>
                     <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
                     <CardContent>
                         <CardTitle>{event.nome}</CardTitle>
@@ -65,7 +72,7 @@ const EventosCategoria: React.FC = () => {
                 {eventos
                 .filter(event => event.categoria ==="matematica")
                 .map(event => (
-                    <CardContainer key={event.id}>
+                    <CardContainer key={event.id} onClick={() => handleEventoClick(event.id)}>
                     <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
                     <CardContent>
                         <CardTitle>{event.nome}</CardTitle>
