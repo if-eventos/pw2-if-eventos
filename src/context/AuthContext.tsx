@@ -34,10 +34,11 @@ interface IAuthContext {
     user: User | null
     logar: (email:string, password:string) => Promise<void>
     deslogar: () => Promise<void>
+    setUser: (user: User) => void;
 }
 
 export const AuthContext = createContext({} as IAuthContext)
-
+setUser: () =>{}
 
 type Props = {
     children: React.ReactNode
@@ -99,7 +100,7 @@ export function AuthProvider({children}:Props) {
 
 
     return (
-        <AuthContext.Provider value={{user, logar, deslogar,}}>
+        <AuthContext.Provider value={{user, logar, deslogar, setUser}}>
             {children}
         </AuthContext.Provider>
     )

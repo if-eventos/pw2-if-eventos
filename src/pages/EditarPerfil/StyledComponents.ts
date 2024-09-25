@@ -12,6 +12,7 @@ export const Main = styled.main`
 
   @media (max-width: 768px) {
     padding: 40px;
+    width: 90%;
   }
 
   @media (max-width: 480px) {
@@ -22,7 +23,7 @@ export const Main = styled.main`
 
 export const Container = styled.div`
   background-color: white;
-  max-width: 800px;
+  max-width: 600px;
   width: 600px;
   max-height: 650px;
   height: 650px;
@@ -38,8 +39,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 480px) {
-    width: 100%;
-    max-height: none;
+    width: 80%;
     height: auto;
     padding: 20px;
   }

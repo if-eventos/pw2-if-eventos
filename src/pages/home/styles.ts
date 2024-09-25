@@ -20,7 +20,7 @@ export const HeaderContainer = styled.body`
   }
 
   @media (max-width: 480px) {
-    padding: 1px;
+    font-size:10px;
 
   }
 

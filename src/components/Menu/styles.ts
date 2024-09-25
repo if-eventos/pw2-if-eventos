@@ -6,8 +6,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 0px 10px black;
-
+    box-shadow: 0px 1px 10px 0px black; 
 
     @media (max-width: 810px) {
       flex-flow: row wrap;

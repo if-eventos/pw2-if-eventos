@@ -7,6 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchemaUpdate, UserSchemaUpdateType } from '../../utils/patchValidation';
 import { EditUploader } from '../../components/EditUploader';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+
+
 
 export default function EditarPerfil() {
     const auth = useContext(AuthContext); // Acessando o contexto de autenticação
@@ -29,12 +34,13 @@ export default function EditarPerfil() {
             setValue("email", auth.user.email);
             setValue("telefone", auth.user.telefone || '');
         }
+        
     }, [auth.user, setValue]);
 
     
 
     let callCount = 0;
-    async function handleUpdate(data: UserSchemaUpdateType) { // Corrigido o tipo aqui
+    async function handleUpdate(data: UserSchemaUpdateType) {
 
         console.log('URL base:', api.getUri());
         console.log('Palestrantes:', auth);
@@ -59,10 +65,26 @@ export default function EditarPerfil() {
             });
 
             if (response.status === 200) {
+                toast.success('Perfil atualizado!');
+                if (auth.user?.id !== undefined) {
+                    auth.setUser({
+                        ...auth.user,
+                        name: data.name || '',
+                        email: data.email || '',
+                        telefone: data.telefone || '',
+                        image: image ? URL.createObjectURL(image) : auth.user?.image || '',
+                        id: auth.user.id,  // Certifique-se de que o id está definido
+                    });
+                }
+                
+                
+                
+
                 console.log('Perfil atualizado com sucesso!');
                 // Aqui você pode adicionar uma notificação de sucesso ou redirecionar o usuário
             } else {
                 console.error('Erro ao atualizar perfil:', response.status);
+                toast.error('Erro ao atualizar'); 
             }
         } catch (error) {
             console.error("Erro ao atualizar perfil:", error);
@@ -76,51 +98,56 @@ export default function EditarPerfil() {
         navigate('/'); 
     }
 
+
     return (
-        <Main>
-            <Container>
-                {/* Título da página */}
-                <TitleConfig>Configurações</TitleConfig>
 
-                <Profile>
-                    {/* Perfil e ícone de editar foto */}
-                    <AvatarProfile>
-                        <img src={`${api.getUri()}${auth.user?.image}`} alt={'foto perfil'} style={{ height: '70px', borderRadius: '50%', width: '70px'}} />
-                        <EditUploader image={image} setImage={setImage} />
-                    </AvatarProfile>
-
-                    {/* Informações do usuário */}
-                    <InfoUser>
-                        <p><strong>{`${auth.user?.name}`}</strong></p>
-                        <p>{`${auth.user?.email}`}</p>
-                    </InfoUser>
-                </Profile>
-
-                {/* Formulário para alterar informações do usuário */}
-                <Form onSubmit={handleSubmit(handleUpdate)}>
-                    <label>
-                        Nome
-                        <input type='text' {...register("name")} style={{ marginLeft: '36px' }} />
-                        {errors.name && <span>{errors.name.message}</span>}
-                    </label>
-                    <label>
-                        Email
-                        <input type='email' {...register("email")} style={{ marginLeft: '36px' }} />
-                        {errors.email && <span>{errors.email.message}</span>}
-                    </label>
-                    <label>
-                        Telefone
-                        <input type='text' {...register("telefone")} style={{ marginLeft: '19px' }} />
-                        {errors.telefone && <span>{errors.telefone.message}</span>}
-                    </label>
+        <Main style={{ overflowX: 'hidden' }}>
+            <motion.div initial={{x: 1000}} animate={{x: 0}} exit={{x: window.innerWidth}} style={{width: '100%'}}>
+                <Container>
+                    {/* Título da página */}
                     
-                    <Botoes>
-                        <BotaoCancelar type="button" onClick={handleCancel}>Cancelar</BotaoCancelar>
-                        <BotaoSalvar type="submit">Salvar</BotaoSalvar>
-                    </Botoes>
-                </Form>
+                    <TitleConfig>Configurações</TitleConfig>
+                    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover />
+                    <Profile>
+                        {/* Perfil e ícone de editar foto */}
+                        <AvatarProfile>
+                            <img src={`${api.getUri()}${auth.user?.image}`} alt={'foto perfil'} style={{ height: '70px', borderRadius: '50%', width: '70px'}} />
+                            <EditUploader image={image} setImage={setImage} />
+                        </AvatarProfile>
 
-            </Container>
+                        {/* Informações do usuário */}
+                        <InfoUser>
+                            <p><strong>{`${auth.user?.name}`}</strong></p>
+                            <p>{`${auth.user?.email}`}</p>
+                        </InfoUser>
+                    </Profile>
+
+                    {/* Formulário para alterar informações do usuário */}
+                    <Form onSubmit={handleSubmit(handleUpdate)}>
+                        <label>
+                            Nome
+                            <input type='text' {...register("name")} style={{ marginLeft: '36px' }} />
+                            {errors.name && <span>{errors.name.message}</span>}
+                        </label>
+                        <label>
+                            Email
+                            <input type='email' {...register("email")} style={{ marginLeft: '36px' }} />
+                            {errors.email && <span>{errors.email.message}</span>}
+                        </label>
+                        <label>
+                            Telefone
+                            <input type='text' {...register("telefone")} style={{ marginLeft: '19px' }} />
+                            {errors.telefone && <span>{errors.telefone.message}</span>}
+                        </label>
+                        
+                        <Botoes>
+                            <BotaoCancelar type="button" onClick={handleCancel}>Cancelar</BotaoCancelar>
+                            <BotaoSalvar type="submit">Salvar</BotaoSalvar>
+                        </Botoes>
+                    </Form>
+
+                </Container>
+            </motion.div>
         </Main>
     );
 }
