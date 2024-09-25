@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ImageUploader } from "../../components/ImageUploader"
+import { ImageUploader, ProfilePictureUploader } from "../../components/ImageUploader"
 import { SubmitButton } from "../../components/Buttons"
 import { InputStyled } from "../../components/Input"
 import { Container, 
@@ -81,7 +81,7 @@ export default function Cadastro() {
         <Container >
             <FormStyled onSubmit={handleSubmit((data) => handleSignup(data))}>
 
-                <ImageUploader image={image} setImage={setImage} />
+                <ProfilePictureUploader image={image} setImage={setImage} />
 
                 <InputStyled $iconPath={icon_profile} {...register("name")} placeholder="nome"  />
                 {errors.name?.message && <div>{errors.name.message}</div>}
