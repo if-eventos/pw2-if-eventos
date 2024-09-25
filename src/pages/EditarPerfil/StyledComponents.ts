@@ -58,9 +58,11 @@ export const TitleConfig = styled.h4`
   @media (max-width: 768px) {
     font-size: 30px;
     padding: 10px;
-    width: 100%;
+    width: 80%;
     background-color: white;
     color: black;
+    text-align: center;
+    margin-left: 10%;
   }
 
   @media (max-width: 480px) {
@@ -85,6 +87,8 @@ export const Profile = styled.div`
 `;
 
 export const AvatarProfile = styled.div`
+  display: flex;
+  flex-direction: row;
   position: relative;
   width: 70px;
   height: 70px;
@@ -144,6 +148,11 @@ export const Botoes = styled.div`
   display: flex;
   padding: 20px;
   justify-content: space-between;
+  margin-right: 30%;
+  gap: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 768px) {
       gap: 20px;

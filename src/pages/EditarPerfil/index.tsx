@@ -1,16 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { Main, Container, TitleConfig, Profile, AvatarProfile, InfoUser, Form, Botoes, BotaoCancelar, BotaoSalvar } from './StyledComponents';
 import { api } from '../../api/axios';
 import { AuthContext } from '../../context/AuthContext';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchemaUpdate, UserSchemaUpdateType } from '../../utils/patchValidation';
-import { ImageUploader } from '../../components/ImageUploader';
-
+import { EditUploader } from '../../components/EditUploader';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditarPerfil() {
     const auth = useContext(AuthContext); // Acessando o contexto de autenticação
     const [image, setImage] = useState<File | undefined>(undefined); // Para manipular a imagem de perfil
+    const navigate = useNavigate();
 
     const { 
         register, 
@@ -71,7 +72,9 @@ export default function EditarPerfil() {
         console.log(`handleUpdate foi chamada ${callCount} vezes`);
     }
 
-    
+    function handleCancel() {
+        navigate('/'); 
+    }
 
     return (
         <Main>
@@ -82,10 +85,8 @@ export default function EditarPerfil() {
                 <Profile>
                     {/* Perfil e ícone de editar foto */}
                     <AvatarProfile>
-                        <img src={`${api.getUri()}${auth.user?.image}`} alt={'foto perfil'} style={{ height: '70px', borderRadius: '50%', width: '70px' }} />
-                        <button style={{ cursor: "pointer" }}>
-                            <img src="icone-editar.png" alt="Editar" style={{ position: 'absolute', bottom: '0', right: '0', width: '20px', height: '20px', color: 'white' }} />
-                        </button>
+                        <img src={`${api.getUri()}${auth.user?.image}`} alt={'foto perfil'} style={{ height: '70px', borderRadius: '50%', width: '70px'}} />
+                        <EditUploader image={image} setImage={setImage} />
                     </AvatarProfile>
 
                     {/* Informações do usuário */}
@@ -109,12 +110,12 @@ export default function EditarPerfil() {
                     </label>
                     <label>
                         Telefone
-                        <input type='text' {...register("telefone")} style={{ marginLeft: '36px' }} />
+                        <input type='text' {...register("telefone")} style={{ marginLeft: '19px' }} />
                         {errors.telefone && <span>{errors.telefone.message}</span>}
                     </label>
-                    <ImageUploader image={image} setImage={setImage} />
+                    
                     <Botoes>
-                        <BotaoCancelar type="button">Cancelar</BotaoCancelar>
+                        <BotaoCancelar type="button" onClick={handleCancel}>Cancelar</BotaoCancelar>
                         <BotaoSalvar type="submit">Salvar</BotaoSalvar>
                     </Botoes>
                 </Form>

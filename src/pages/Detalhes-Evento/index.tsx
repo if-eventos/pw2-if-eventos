@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   GlobalStyle,
   HeaderContainer,
@@ -18,6 +18,9 @@ import {
 } from './styles';
 import { api } from '../../api/axios';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+
+
 
 interface Palestrante {
   id: number;
@@ -38,6 +41,9 @@ export default function DetalhesEvento() {
   const { id } = useParams(); 
   const [palestrantes, setPalestrantes] = useState<Palestrante[]>([]);
   const [evento, setEvento] = useState<Event | null>(null);
+  const [participantes, setParticipantes] = useState<string[]>([]);
+  const [participando, setParticipando] = useState(false);
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     const fetchEvento = async () => {
@@ -63,9 +69,75 @@ export default function DetalhesEvento() {
     }
   }, [id]);
 
+  useEffect(() => {
+    // Verifica se o usuário já está participando do evento ao montar o componente
+    const verificarParticipacao = async () => {
+      try {
+        const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
+        const users = response.data['user'];
+
+        // Verifica se o usuário logado está na lista de participantes
+        if (Array.isArray(users)) {
+          setParticipantes(users);
+          const userId = auth.user?.id
+          const isParticipando = users.some((user) => user.id === userId);
+          setParticipando(isParticipando);  // Atualiza o estado de participação
+        }
+      } catch (error) {
+        console.error('Erro ao verificar participação:', error);
+      }
+    };
+
+    verificarParticipacao();
+  }, [id]);
+
+
+
+
+
+
   if (!evento) {
     return <div>Carregando detalhes do evento...</div>;
   }
+
+  const participarDoEvento = async () => {
+    try {
+
+      // Adiciona o usuario no evento desejado
+      await api.post(`/api/v1/ouvinte/adicionar/${id}`);
+
+      // Atualiza a lista de participantes depois do cara clicar em participar do evento
+      const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
+      const users = response.data['user'];
+
+      //Aqui ele vai verificar se o array é de fato um array/matriz :D
+      if (Array.isArray(users)) {
+        setParticipantes(users);
+        console.log('Participantes após inscrição:', users);
+      } else {
+        console.error('error:', response.data);
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+    }
+  };
+
+  const sairDoEvento = async () => {
+    try {
+      await api.delete(`/api/v1/ouvinte/deletar/${id}`); // Assume que essa rota remove o ouvinte
+
+      // Atualiza a lista de participantes após o usuário sair
+      const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
+      const users = response.data['user'];
+
+      if (Array.isArray(users)) {
+        setParticipantes(users);
+        setParticipando(true);  // Atualiza o estado de participação
+      }
+    } catch (error) {
+      console.error('Erro ao sair do evento:', error);
+    }
+  };
 
   return (
     <>
@@ -75,7 +147,12 @@ export default function DetalhesEvento() {
         <Date>{evento.data_hora}</Date>
         <TitleButtonContainer>
           <Title>{evento.nome}</Title>
-          <JoinButton>Participar</JoinButton>
+          {participando ? (
+              <JoinButton onClick={sairDoEvento}>Sair</JoinButton>
+            ) : (
+              <JoinButton onClick={participarDoEvento}>Participar</JoinButton>
+            )}
+          
         </TitleButtonContainer>
         <Title2>Sobre o Evento</Title2>
       </HeaderContainer>
