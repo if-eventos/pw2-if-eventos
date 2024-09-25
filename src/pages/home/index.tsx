@@ -10,15 +10,17 @@ const Home: React.FC = () => {
     <div>
       
       <HeaderContainer>
-        <img src="./backHome.png" alt="" width={'100%'} />
-        <h1 style={{position: 'absolute', top: '100px', textAlign: 'center', marginLeft: '10%'}}>Navegue pelos melhores eventos acadêmicos!</h1>
-        <p style={{position: 'absolute', top: '170px', textAlign: 'center', marginLeft: '10%'}}>
+        <ImageContainer><img src="./backHome.png" alt="" width={'100%'} height={'180px'} /></ImageContainer>
+        <h1 style={{position: 'absolute', top: '10px', textAlign: 'center', marginLeft: '10%', padding: '10px'}}>Navegue pelos melhores eventos acadêmicos!</h1>
+        <p style={{position: 'absolute', top: '80px', textAlign: 'center', marginLeft: '10%', width: '60%'}}>
           Viaje pelos Eventos Acadêmicos mais significativos do momento! De conferências internacionais
           a simpósios locais, mergulhe em um oceano de descobertas, debates e inovações que estão
           moldando o futuro da academia.
         </p>
       </HeaderContainer>
 
+
+      <SectionTitle>Destaques</SectionTitle>
       <SectionContainer>
         {/* rendizar allEventos */}
         <AllEventos />

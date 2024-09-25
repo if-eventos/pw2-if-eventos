@@ -33,7 +33,7 @@ export const CardContainer = styled.div`
 // Estilo da imagem do cartão
 export const CardImage = styled.img`
   width: 100%;
-  height: 65%;
+  height: 50%;
   object-fit: cover;
   border-radius: 8px 8px 0px 0px;
 
@@ -49,6 +49,7 @@ export const CardImage = styled.img`
 // Estilo do conteúdo do cartão (informações)
 export const CardContent = styled.div`
   padding: 10px;
+  width: 100%;
 `;
 
 // Título do cartão (evento)
@@ -56,6 +57,7 @@ export const CardTitle = styled.h3`
   font-size: 16px;
   margin-left: 5px;
   padding: 3px;
+  width: 100%;
 
   @media (max-width: 768px) {
     font-size: 14px;
