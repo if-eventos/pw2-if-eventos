@@ -5,7 +5,20 @@ import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
+import { 
+    Container,
+    FormStyled
+ } from "./styles"
+import { SubmitButton } from "../../components/Buttons"
+
 import { ImageUploader } from "../../components/ImageUploader"
+import { InputStyled } from "../../components/Input"
+
+import icon_map_pin from "../../assets/map-pin-bold.png"
+import icon_calendar from "../../assets/calendar-dots-bold.png"
+import icon_graduation_cap from "../../assets/graduation-cap-bold.png"
+import icon_link from "../../assets/link-bold.png"
+import icon_clipboard from "../../assets/clipboard-text-bold.png"
 
 
 export default function CriarEventos() {
@@ -51,32 +64,34 @@ export default function CriarEventos() {
 
 
     return (
-        <div>
+        <Container>
             <h1>Crie o seu evento:</h1>
 
-            <form style={{display: 'flex', flexDirection: 'column'}}
+            <FormStyled style={{display: 'flex', flexDirection: 'column'}}
             onSubmit={handleSubmit(data => handleCreateEvent(data))}>
 
                 
                 <ImageUploader image={image} setImage={setImage} />
 
-                <input {...register("nome")} placeholder="nome"  />
+                <InputStyled $iconPath={icon_map_pin} {...register("nome")} placeholder="nome"  />
                 {errors.nome?.message && <div>{errors.nome.message}</div>}
 
-                <input {...register("descricao")} placeholder="descricao" />
+                <InputStyled $iconPath={icon_clipboard} {...register("descricao")} placeholder="descricao" />
                 {errors.descricao?.message && <div>{errors.descricao.message}</div>}
                 
-                <input type="date" {...register("data_hora")} placeholder="data_hora" />
+                <InputStyled $iconPath={icon_calendar} type="date" {...register("data_hora")} placeholder="data_hora" />
                 {errors.data_hora?.message && <div>{errors.data_hora.message}</div>}
                 
-                <input {...register("urlsiteoficial")} placeholder="urlsiteoficial" />
+                <InputStyled $iconPath={icon_link} {...register("urlsiteoficial")} placeholder="urlsiteoficial" />
                 {errors.urlsiteoficial?.message && <div>{errors.urlsiteoficial.message}</div>}
 
-                <input {...register("categoria")} placeholder="categoria" />
+                <InputStyled $iconPath={icon_graduation_cap} {...register("categoria")} placeholder="categoria" />
                 {errors.categoria?.message && <div>{errors.categoria.message}</div>}
 
-                <button type="submit">Criar Evento!</button>
-            </form>
-        </div>
+                <SubmitButton>
+                    Criar Evento!
+                </SubmitButton>
+            </FormStyled>
+        </Container>
     )
 }
