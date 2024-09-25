@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { CardContainer, CardImage, CardContent, CardTitle, CardInfo, GridContainer } from './styles';
 import { api } from '../../api/axios';
 import { AiFillCalendar, AiFillFileText } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 interface Event {
   id: number;
@@ -15,6 +16,7 @@ interface Event {
 
 const AllEventos: React.FC = () => {
   const [eventos, setEventos] = useState<Event[]>([]);
+  const navigate = useNavigate();
 
   const getEvento = async () => {
     try {
@@ -33,12 +35,16 @@ const AllEventos: React.FC = () => {
     getEvento();
   }, []);
 
+  const handleEventoClick = (id: number) =>{
+    navigate(`detalhes-evento/${id}`);
+  }
+
   return (
     <div>
-      {eventos.length > 0 ? (
+      {eventos.length > 0 ? ( 
         <GridContainer>
           {eventos.map(event => (
-            <CardContainer key={event.id}>
+            <CardContainer key={event.id} onClick={() => handleEventoClick(event.id)}>
               <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
               <CardContent>
                 <CardTitle>{event.nome}</CardTitle>

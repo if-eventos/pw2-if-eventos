@@ -32,7 +32,7 @@ export function Router() {
                     <>
                     <Route path='/' element={<Home />} />
                     <Route path='/editar-perfil' element={<EditarPerfil />} />
-                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
+                    <Route path='/detalhes-evento/:id' element={<DetalhesEvento/>} />
                     <Route path='/criarevento' element={<CriarEventos />} />
                     <Route path='/inscricoes' element={<Inscricoes />} />
                     </> // Substituir por pages que o usuario acessa quando esta logado

@@ -1,5 +1,5 @@
 // src/App.tsx
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   GlobalStyle,
   HeaderContainer,
@@ -13,76 +13,188 @@ import {
   MapImage,
   SpeakersContainer,
   SpeakerList,
-  SpeakerCard,
-  SpeakerImage,
-  SpeakerName,
   Title2,
   TitleButtonContainer,
-  globalContainer,
 } from './styles';
+import { api } from '../../api/axios';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
-const App: React.FC = () => {
+
+interface Palestrante {
+  id: number;
+  name: string;
+  image: string;
+}
+
+interface Event {
+  id: number;
+  nome: string;
+  descricao: string;
+  image: string;
+  data_hora: string;
+  categoria: string;
+}
+
+export default function DetalhesEvento() {
+  const { id } = useParams(); 
+  const [palestrantes, setPalestrantes] = useState<Palestrante[]>([]);
+  const [evento, setEvento] = useState<Event | null>(null);
+  const [participantes, setParticipantes] = useState<string[]>([]);
+  const [participando, setParticipando] = useState(false);
+  const auth = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchEvento = async () => {
+      try {
+        // Buscar detalhes do evento
+        const response = await api.get(`/api/v1/evento/todos/${id}`);
+        setEvento(response.data.evento);
+
+        // Buscar palestrantes do evento
+        const responsePalestra = await api.get(`/api/v1/palestrante/readAll/${id}`);
+        setPalestrantes(responsePalestra.data.palestrantes || []); // Garante um array vazio se não houver palestrantes
+
+        console.log('URL base:', api.getUri());
+        console.log('Palestrantes:', responsePalestra.data.palestrantes);
+        
+      } catch (error) {
+        console.error("Erro ao buscar o evento ou palestrantes:", error);
+      }
+    };
+
+    if (id) {
+      fetchEvento();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    // Verifica se o usuário já está participando do evento ao montar o componente
+    const verificarParticipacao = async () => {
+      try {
+        const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
+        const users = response.data['user'];
+
+        // Verifica se o usuário logado está na lista de participantes
+        if (Array.isArray(users)) {
+          setParticipantes(users);
+          const userId = auth.user?.id
+          const isParticipando = users.some((user) => user.id === userId);
+          setParticipando(isParticipando);  // Atualiza o estado de participação
+        }
+      } catch (error) {
+        console.error('Erro ao verificar participação:', error);
+      }
+    };
+
+    verificarParticipacao();
+  }, [id]);
+
+
+
+
+
+
+  if (!evento) {
+    return <div>Carregando detalhes do evento...</div>;
+  }
+
+  const participarDoEvento = async () => {
+    try {
+
+      // Adiciona o usuario no evento desejado
+      await api.post(`/api/v1/ouvinte/adicionar/${id}`);
+
+      // Atualiza a lista de participantes depois do cara clicar em participar do evento
+      const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
+      const users = response.data['user'];
+
+      //Aqui ele vai verificar se o array é de fato um array/matriz :D
+      if (Array.isArray(users)) {
+        setParticipantes(users);
+        setParticipando(true);
+        toast.success('Você está participando do evento!');
+        console.log('Participantes após inscrição:', users);
+      } else {
+        console.error('error:', response.data);
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      toast.error('Erro ao tentar participar do evento.'); 
+    }
+  };
+
+  const sairDoEvento = async () => {
+    try {
+      await api.delete(`/api/v1/ouvinte/deletar/${id}`); // Assume que essa rota remove o ouvinte
+
+      // Atualiza a lista de participantes após o usuário sair
+      const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
+      const users = response.data['user'];
+
+      if (Array.isArray(users)) {
+        setParticipantes(users);
+        setParticipando(false);  // Atualiza o estado de participação
+        toast.info('Você saiu do evento.');
+      }
+    } catch (error) {
+      console.error('Erro ao sair do evento:', error);
+      toast.error('Erro ao tentar sair do evento.'); 
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
       <HeaderContainer>
-        <Image src="/events.png" alt="Banner" />
-        <Date>Terça-feira, 19 de junho</Date>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover />
+        <Image src={`${api.getUri()}${evento.image}`} alt={evento.nome} />
+        <Date>{evento.data_hora}</Date>
         <TitleButtonContainer>
-          <Title>Introdução à área de exatas</Title>
-          <JoinButton>Participar</JoinButton>
+          <Title>{evento.nome}</Title>
+          {participando ? (
+              <JoinButton onClick={sairDoEvento}>Sair</JoinButton>
+            ) : (
+              <JoinButton onClick={participarDoEvento}>Participar</JoinButton>
+            )}
+          
         </TitleButtonContainer>
-        <Title2>Sobre o Evento</Title2> 
+        <Title2>Sobre o Evento</Title2>
       </HeaderContainer>
 
       <EventContainer>
-        <Description>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. NullaLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.
-            quis sem at nibh elementum imperdiet.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-            quis sem at nibh elementum imperdiet.
-          </p>
-        </Description>
-        
+        <Description>{evento.descricao}</Description>
       </EventContainer>
 
       <LocationContainer>
-        <h2>Localização</h2>
-        <MapImage src="OIP.jfif" alt="Localização do evento" />
-        <p>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
+        <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>Localização</h2>
+        <MapImage src="../public/OIP.jfif" alt="Localização do evento" />
+        <p style={{ margin: '10px' }}>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
       </LocationContainer>
 
       <SpeakersContainer>
         <h2>Palestrantes</h2>
         <SpeakerList>
-          <SpeakerCard>
-            <SpeakerImage src="speaker1.jpg" alt="Pedro Neto" />
-            <SpeakerName>Pedro Neto</SpeakerName>
-          </SpeakerCard>
-          <SpeakerCard>
-            <SpeakerImage src="speaker2.jpg" alt="Jhonatan Lira" />
-            <SpeakerName>Jhonatan Lira</SpeakerName>
-          </SpeakerCard>
-          <SpeakerCard>
-            <SpeakerImage src="speaker3.jpg" alt="Fábio Nogueira" />
-            <SpeakerName>Fábio Nogueira</SpeakerName>
-          </SpeakerCard>
+          {palestrantes.length > 0 ? (
+            palestrantes.map((palestrante) => (
+              <div key={palestrante.id}>
+                {/* Aqui exibimos a imagem e nome do palestrante */}
+                <img
+                  src={`${api.getUri()}${palestrante.image}`}
+                  alt={`Foto de ${palestrante.name}`}
+                  style={{ width: '200px', height: '150px' }}
+                />
+
+                <p>{palestrante.name}</p>
+              </div>
+            ))
+          ) : (
+            <p>Nenhum palestrante disponível</p>
+          )}
         </SpeakerList>
       </SpeakersContainer>
     </>
   );
-};
-
-export default App;
+}
