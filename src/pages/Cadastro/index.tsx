@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ImageUploader, ProfilePictureUploader } from "../../components/ImageUploader"
+import { ProfilePictureUploader } from "../../components/ImageUploader"
 import { SubmitButton } from "../../components/Buttons"
 import { InputStyled } from "../../components/Input"
 import { Container, 

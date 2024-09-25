@@ -8,8 +8,11 @@ export const LabelStyled = styled.label`
 `
 
 export const BannerUploaderStyled = styled.img`
-    max-width: 200px;
-    max-height: 200px;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 5/2;
+    object-fit: cover;
+
     cursor: pointer;
 
     border-radius: 8px;

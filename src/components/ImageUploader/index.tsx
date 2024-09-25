@@ -11,7 +11,7 @@ type Props = {
 }
 
 
-export function ImageUploader({ image, setImage }:Props) {
+export function BannerUploader({ image, setImage }:Props) {
 
     function handleImage(e:React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files) {

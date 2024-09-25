@@ -11,7 +11,7 @@ import {
  } from "./styles"
 import { SubmitButton } from "../../components/Buttons"
 
-import { ImageUploader } from "../../components/ImageUploader"
+import { BannerUploader } from "../../components/ImageUploader"
 import { InputStyled } from "../../components/Input"
 
 import icon_map_pin from "../../assets/map-pin-bold.png"
@@ -71,7 +71,7 @@ export default function CriarEventos() {
             onSubmit={handleSubmit(data => handleCreateEvent(data))}>
 
                 
-                <ImageUploader image={image} setImage={setImage} />
+                <BannerUploader image={image} setImage={setImage} />
 
                 <InputStyled $iconPath={icon_map_pin} {...register("nome")} placeholder="nome"  />
                 {errors.nome?.message && <div>{errors.nome.message}</div>}
