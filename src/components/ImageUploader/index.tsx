@@ -1,3 +1,8 @@
+import no_image_event from "../../assets/no_image_event.png"
+import { 
+    BannerUploaderStyled,
+    LabelStyled
+ } from "./styles"
 
 type Props = {
     image: File | undefined
@@ -15,23 +20,12 @@ export function ImageUploader({ image, setImage }:Props) {
 
     return (
         <div>
-            <label htmlFor="image-banner" style={{width: 'fit-content', height: 'fit-content'}}>
+            <LabelStyled htmlFor="image-banner">
+                <BannerUploaderStyled 
+                    src={ image? URL.createObjectURL(image) : no_image_event } 
+                    alt="event-banner" />
+            </LabelStyled>
 
-                { 
-                    image ?
-                    (
-                        <img src={ URL.createObjectURL(image) } 
-                            alt="event-banner" 
-                            style={{maxWidth: '200px', maxHeight: '200px', cursor: 'pointer'}}/>
-                    ) 
-                    : 
-                    (
-                        <div style={{width: '200px', height: '50px', backgroundColor: '#D4DCFF', cursor: 'pointer'}}>
-                            Selecione uma imagem
-                        </div>
-                    )
-                }
-            </label>
             <input type="file" name="image-banner" id="image-banner" hidden={true}
                 onChange={handleImage} />
         </div>
