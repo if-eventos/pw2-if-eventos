@@ -5,6 +5,11 @@ import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
+import { 
+    Container,
+    FormStyled
+ } from "./styles"
+
 import { ImageUploader } from "../../components/ImageUploader"
 import { InputStyled } from "../../components/Input"
 
@@ -58,10 +63,10 @@ export default function CriarEventos() {
 
 
     return (
-        <div>
+        <Container>
             <h1>Crie o seu evento:</h1>
 
-            <form style={{display: 'flex', flexDirection: 'column'}}
+            <FormStyled style={{display: 'flex', flexDirection: 'column'}}
             onSubmit={handleSubmit(data => handleCreateEvent(data))}>
 
                 
@@ -83,7 +88,7 @@ export default function CriarEventos() {
                 {errors.categoria?.message && <div>{errors.categoria.message}</div>}
 
                 <button type="submit">Criar Evento!</button>
-            </form>
-        </div>
+            </FormStyled>
+        </Container>
     )
 }
