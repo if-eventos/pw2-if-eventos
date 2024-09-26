@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../../api/axios";
-import { CardContainer, CardContent, CardImage, CardInfo, CardTitle, GridContainer } from "../../components/Evento/styles";
-import { AiFillCalendar, AiFillFileText } from "react-icons/ai";
+import { GridContainer } from "../../components/Evento/styles";
+import { Evento } from "../../components/Evento/Evento";
 
 interface Event {
     id: number;
@@ -45,16 +45,7 @@ export default function Inscricoes() {
                 <GridContainer>
                     {inscricoes
                     .map(event => (
-                        <CardContainer key={event.id}>
-                        <CardImage src={`${api.getUri()}${event.image}`} alt={event.nome} />
-                        <CardContent>
-                            <CardTitle>{event.nome}</CardTitle>
-                            <CardInfo>
-                            <AiFillCalendar /> {new Date(event.data_hora).toLocaleDateString()} <br />
-                            <AiFillFileText /> {event.descricao}
-                            </CardInfo>
-                        </CardContent>
-                        </CardContainer>
+                      <Evento event={event} key={event.id}/>
                     ))}
                 </GridContainer>
             </div>
