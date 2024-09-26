@@ -65,6 +65,34 @@ const EventosCategoria: React.FC = () => {
                 <p>Nenhum evento disponível</p>
             )}
 
+            <SectionTitle>Eventos de Automação</SectionTitle>
+            {/* Renderiza Eventos de MAT.*/}
+            {eventos.length > 0 ? (
+                <GridContainer>
+                {eventos
+                .filter(event => event.categoria ==="controle-automacao")
+                .map(event => (
+                  <Evento event={event} key={event.id}/>
+                ))}
+                </GridContainer>
+            ) : (
+                <p>Nenhum evento disponível</p>
+            )}
+
+            <SectionTitle>Eventos de Engenharia Civil</SectionTitle>
+            {/* Renderiza Eventos de MAT.*/}
+            {eventos.length > 0 ? (
+                <GridContainer>
+                {eventos
+                .filter(event => event.categoria ==="engenharia-civil")
+                .map(event => (
+                  <Evento event={event} key={event.id}/>
+                ))}
+                </GridContainer>
+            ) : (
+                <p>Nenhum evento disponível</p>
+            )}
+
 
     </div>
   );
