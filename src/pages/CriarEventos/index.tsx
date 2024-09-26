@@ -7,7 +7,10 @@ import { useState } from "react"
 
 import { 
     Container,
-    FormStyled
+    FormStyled,
+    Categoria,
+    LabelCategoria,
+    ContainerCategoria,
  } from "./styles"
 import { SubmitButton } from "../../components/Buttons"
 
@@ -17,7 +20,7 @@ import { ErrorMessage } from "../../components/ErrorMessage"
 
 import icon_map_pin from "../../assets/map-pin-bold.png"
 import icon_calendar from "../../assets/calendar-dots-bold.png"
-import icon_graduation_cap from "../../assets/graduation-cap-bold.png"
+// import icon_graduation_cap from "../../assets/graduation-cap-bold.png"
 import icon_link from "../../assets/link-bold.png"
 import icon_clipboard from "../../assets/clipboard-text-bold.png"
 
@@ -94,7 +97,18 @@ export default function CriarEventos() {
                     {errors.local_ou_link?.message && <div>{errors.local_ou_link.message}</div>}
                 </ErrorMessage>
                 
-                <InputStyled $iconPath={icon_graduation_cap} {...register("categoria")} placeholder="categoria" />
+                {/* <InputStyled $iconPath={icon_graduation_cap} {...register("categoria")} placeholder="categoria" /> */}
+                
+                <ContainerCategoria>
+                    <LabelCategoria htmlFor="categoria">Escolha a categoria:</LabelCategoria>
+                    <Categoria id="categoria" {...register("categoria")}>
+                        <option value="">--categoria--</option>
+                        <option value="ads">ADS</option>
+                        <option value="matematica">Matemática</option>
+                        <option value="controle">Controle</option>
+                        <option value="eletrica">Elétrica</option>
+                    </Categoria>
+                </ContainerCategoria>
                 <ErrorMessage>
                     {errors.categoria?.message && <div>{errors.categoria.message}</div>}
                 </ErrorMessage>
