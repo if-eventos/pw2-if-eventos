@@ -72,6 +72,9 @@ export default function Menu() {
                         <PageButton callback={() => navigate('/inscricoes')}>
                           inscrições
                         </PageButton>
+                        <PageButton callback={() => navigate('/editar-perfil')}>
+                          Editar Perfil
+                        </PageButton>
                       </>
                     ) :
                     (
