@@ -40,7 +40,7 @@ export default function CriarEventos() {
         requestBody.append('categoria', data.categoria)
         requestBody.append('descricao', data.descricao)
         requestBody.append('data_hora', data.data_hora)
-        requestBody.append('urlsiteoficial', data.urlsiteoficial)
+        requestBody.append('local_ou_link', data.local_ou_link)
 
         if (image) {
             requestBody.append('image', image)
@@ -82,8 +82,8 @@ export default function CriarEventos() {
                 <InputStyled $iconPath={icon_calendar} type="date" {...register("data_hora")} placeholder="data_hora" />
                 {errors.data_hora?.message && <div>{errors.data_hora.message}</div>}
                 
-                <InputStyled $iconPath={icon_link} {...register("urlsiteoficial")} placeholder="urlsiteoficial" />
-                {errors.urlsiteoficial?.message && <div>{errors.urlsiteoficial.message}</div>}
+                <InputStyled $iconPath={icon_link} {...register("local_ou_link")} placeholder="local_ou_link" />
+                {errors.local_ou_link?.message && <div>{errors.local_ou_link.message}</div>}
 
                 <InputStyled $iconPath={icon_graduation_cap} {...register("categoria")} placeholder="categoria" />
                 {errors.categoria?.message && <div>{errors.categoria.message}</div>}
