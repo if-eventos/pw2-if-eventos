@@ -58,7 +58,7 @@ const Perfil: React.FC = () => {
           onError={(e) => {
             e.currentTarget.src = "https://via.placeholder.com/100"; 
           }} 
-          style={{height: '100px', marginLeft: '80px', borderRadius: '10%' }} 
+          style={{height: '200px', marginLeft: '80px', borderRadius: '10%' }} 
         />
         
         <SectionTitle>

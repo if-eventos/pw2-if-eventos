@@ -79,6 +79,9 @@ export default function Menu() {
                         <PageButton callback={() => navigate('/perfil')}>
                           perfil
                         </PageButton>
+                        <PageButton callback={() => navigate('/meus-eventos')}>
+                          eventos criados
+                        </PageButton>
                       </>
                     ) :
                     (
