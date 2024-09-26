@@ -44,12 +44,22 @@ export const Text = styled.p`
 
 
 export const TextAreaMinicurriculo = styled.textarea`
-    width: 250px;
+    width: 20vw;
     height: 100px;
     resize: none;
 
     &::placeholder {
         background-color: #D4DCFF;
+    }
+
+    @media (max-width: 810px) {
+        width: 50vw;
+        height: 125px;
+    }
+
+    @media (max-width: 480px) {
+        width: 80vw;
+        height: 130px;
     }
 `
 
