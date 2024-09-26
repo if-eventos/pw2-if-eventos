@@ -22,7 +22,7 @@ import { ErrorMessage } from "../../components/ErrorMessage"
 import icon_map_pin from "../../assets/map-pin-bold.png"
 import icon_calendar from "../../assets/calendar-dots-bold.png"
 // import icon_graduation_cap from "../../assets/graduation-cap-bold.png"
-import icon_link from "../../assets/link-bold.png"
+import icon_signature from "../../assets/signature.png"
 import icon_clipboard from "../../assets/clipboard-text-bold.png"
 
 
@@ -78,7 +78,7 @@ export default function CriarEventos() {
                 
                 <BannerUploader image={image} setImage={setImage} />
 
-                <InputStyled $iconPath={icon_map_pin} {...register("nome")} placeholder="nome"  />
+                <InputStyled $iconPath={icon_signature} {...register("nome")} placeholder="nome"  />
                 <ErrorMessage>
                     {errors.nome?.message && <div>{errors.nome.message}</div>}
                 </ErrorMessage>
@@ -93,7 +93,7 @@ export default function CriarEventos() {
                     {errors.data_hora?.message && <div>{errors.data_hora.message}</div>}
                 </ErrorMessage>
                 
-                <InputStyled $iconPath={icon_link} {...register("local_ou_link")} placeholder="local_ou_link" />
+                <InputStyled $iconPath={icon_map_pin} {...register("local_ou_link")} placeholder="local_ou_link" />
                 <ErrorMessage>
                     {errors.local_ou_link?.message && <div>{errors.local_ou_link.message}</div>}
                 </ErrorMessage>
