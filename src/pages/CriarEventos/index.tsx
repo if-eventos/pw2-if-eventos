@@ -10,8 +10,9 @@ import {
     FormStyled,
     Categoria,
     LabelCategoria,
-    ContainerCategoria,
+    ContainerCategoria
  } from "./styles"
+import { Titulo } from "../../components/Titulo"
 import { SubmitButton } from "../../components/Buttons"
 
 import { BannerUploader } from "../../components/ImageUploader"
@@ -69,7 +70,7 @@ export default function CriarEventos() {
 
     return (
         <Container>
-            <h1>Crie o seu evento:</h1>
+            <Titulo>Crie o seu evento:</Titulo>
 
             <FormStyled style={{display: 'flex', flexDirection: 'column'}}
             onSubmit={handleSubmit(data => handleCreateEvent(data))}>

@@ -12,6 +12,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
 
+    padding-bottom: 200px;
 `
 
 export const FormStyled = styled.form`

@@ -16,6 +16,8 @@ export const BannerUploaderStyled = styled.img`
     cursor: pointer;
 
     border-radius: 8px;
+
+    margin-bottom: 25px;
 `
 
 
