@@ -37,7 +37,7 @@ export const AuthContent = styled.div`
     width: 100%;
     padding-right: 0px;
 
-
+    border-top: solid 1px #51367C;
   }
 `;
 

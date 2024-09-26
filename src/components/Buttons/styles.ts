@@ -28,14 +28,15 @@ export const PageButtonStyled = styled.button`
     height: 35px;
     margin: 0px 7px;
 
-    border: none;
-    border-bottom: solid 2px #51367C;
+    border: none; 
+    /* border-bottom: solid 2px #51367C; */
 
     cursor: pointer;
     font-weight: bolder;
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
+        background-color: #ebe7e0;
     }
 
     @media (max-width: 810px) {
@@ -44,6 +45,8 @@ export const PageButtonStyled = styled.button`
         width: 100%;
         text-align: left;
         padding-left: 20px;
+
+        border-top: solid 1px #51367C;
 
         &:hover {
             transform: none;
