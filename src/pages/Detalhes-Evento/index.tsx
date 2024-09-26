@@ -37,6 +37,7 @@ interface Event {
   image: string;
   data_hora: string;
   categoria: string;
+  local_ou_link: string;
 }
 
 export default function DetalhesEvento() {
@@ -129,15 +130,14 @@ export default function DetalhesEvento() {
 
   const sairDoEvento = async () => {
     try {
-      await api.delete(`/api/v1/ouvinte/deletar/${id}`); // Assume que essa rota remove o ouvinte
+      await api.delete(`/api/v1/ouvinte/deletar/${id}`);
 
-      // Atualiza a lista de participantes após o usuário sair
       const response = await api.get(`/api/v1/ouvinte/readAll/${id}`);
       const users = response.data['user'];
 
       if (Array.isArray(users)) {
         setParticipantes(users);
-        setParticipando(false);  // Atualiza o estado de participação
+        setParticipando(false); 
         toast.info('Você saiu do evento.');
       }
     } catch (error) {
@@ -163,17 +163,16 @@ export default function DetalhesEvento() {
               )}
             
           </TitleButtonContainer>
-          <Title2>Sobre o Evento</Title2>
+          <Title2>Sobre o Evento:</Title2>
         </HeaderContainer>
 
         <EventContainer>
           <Description>{evento.descricao}</Description>
         </EventContainer>
 
+        <Title2>Local / Link do evento:</Title2>
         <LocationContainer>
-          <h2 style={{ marginTop: '50px', marginBottom: '30px' }}>Localização</h2>
-          <MapImage src="../public/OIP.jfif" alt="Localização do evento" />
-          <p style={{ margin: '10px' }}>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</p>
+          <Description>Rua: R. Concretizador Manoel Nicos Bozena, 71-5 - Mangabeira</Description>
         </LocationContainer>
 
         <SpeakersContainer>
