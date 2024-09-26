@@ -106,8 +106,8 @@ export default function CriarEventos() {
                         <option value="">--categoria--</option>
                         <option value="ads">ADS</option>
                         <option value="matematica">Matemática</option>
-                        <option value="controle">Controle</option>
-                        <option value="eletrica">Elétrica</option>
+                        <option value="controle-automacao">Controle e Automação</option>
+                        <option value="engenharia-civil">Engenharia Civil</option>
                     </Categoria>
                 </ContainerCategoria>
                 <ErrorMessage>
