@@ -8,14 +8,10 @@ import Home from './pages/home';
 import EditarPerfil from './pages/EditarPerfil';
 import DetalhesEvento from './pages/Detalhes-Evento';
 import Inscricoes from './pages/Inscricoes';
-<<<<<<< Updated upstream
-import { AnimatePresence } from 'framer-motion';
-=======
 import Perfil from './pages/Perfil';
 import MeusEventos from './pages/MeusEventos';
 import EditarEvento from './pages/EditarEvento';
->>>>>>> Stashed changes
-
+import { AnimatePresence } from 'framer-motion';
 
 export function Router() {
     const {user} = useAuth()
@@ -23,7 +19,6 @@ export function Router() {
     const location = useLocation()
 
     return (
-<<<<<<< Updated upstream
         <AnimatePresence>
             <Routes location={location} key={location.pathname}>
                 {
@@ -45,39 +40,13 @@ export function Router() {
                         <Route path='/detalhes-evento/:id' element={<DetalhesEvento/>} />
                         <Route path='/criarevento' element={<CriarEventos />} />
                         <Route path='/inscricoes' element={<Inscricoes />} />
+                        <Route path='/perfil' element={<Perfil />} />
+                        <Route path='/meus-eventos' element={<MeusEventos />} />
+                        <Route path='/editar-evento' element={<EditarEvento />} />
                         </> // Substituir por pages que o usuario acessa quando esta logado
                     )
                 }
             </Routes>
         </AnimatePresence>
-=======
-        <Routes>
-            {
-                !isLogged ?
-                (
-                    <>
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/cadastro' element={<Cadastro />} />
-                    
-                    
-                    
-                    </>
-                ) 
-                :
-                (
-                    <>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/editar-perfil' element={<EditarPerfil />} />
-                    <Route path='/detalhes-evento' element={<DetalhesEvento/>} />
-                    <Route path='/criarevento' element={<CriarEventos />} />
-                    <Route path='/inscricoes' element={<Inscricoes />} />
-                    <Route path='/perfil' element={<Perfil />} />
-                    <Route path='/meus-eventos' element={<MeusEventos />} />
-                    <Route path='/editar-evento' element={<EditarEvento />} />
-                    </> // Substituir por pages que o usuario acessa quando esta logado
-                )
-            }
-        </Routes>
->>>>>>> Stashed changes
     )
 }

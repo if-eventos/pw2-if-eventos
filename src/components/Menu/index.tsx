@@ -40,9 +40,9 @@ export default function Menu() {
       } 
     }
 
-    function handleEditarPerfil(){
-      navigate('/perfil')
-    }
+    // function handleEditarPerfil(){
+    //   navigate('/perfil')
+    // }
 
     return (
       <Container>
@@ -76,13 +76,8 @@ export default function Menu() {
                         <PageButton callback={() => handleRedirect('/inscricoes')}>
                           inscrições
                         </PageButton>
-<<<<<<< Updated upstream
-                        <PageButton callback={() => handleRedirect('/editar-perfil')}>
-                          Editar Perfil
-=======
                         <PageButton callback={() => navigate('/perfil')}>
                           perfil
->>>>>>> Stashed changes
                         </PageButton>
                       </>
                     ) :
