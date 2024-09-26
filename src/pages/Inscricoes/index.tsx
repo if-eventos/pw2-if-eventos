@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../api/axios";
 import { GridContainer } from "../../components/Evento/styles";
 import { Evento } from "../../components/Evento/Evento";
+import { Titulo } from "../../components/Titulo";
 
 interface Event {
     id: number;
@@ -52,7 +53,9 @@ export default function Inscricoes() {
         ) 
         :
         (
-            <></>
+            <Titulo>
+              Você não se inscreveu em nenhum evento.
+            </Titulo>
         )
     )
 }
