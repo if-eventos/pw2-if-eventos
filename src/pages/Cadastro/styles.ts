@@ -50,3 +50,27 @@ export const TextAreaMinicurriculo = styled.textarea`
         background-color: #D4DCFF;
     }
 `
+
+export const SouPalestrante = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 20px;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+
+export const CheckPalestrante = styled.input`
+    width: 20px;
+    height: 20px;
+
+    cursor: pointer;
+
+    accent-color: #87A2FF;
+`
+
+export const LabelPalestrante = styled.label`
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+`
