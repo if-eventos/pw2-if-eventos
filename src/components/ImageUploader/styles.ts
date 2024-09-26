@@ -7,6 +7,11 @@ export const LabelStyled = styled.label`
 
 `
 
+export const Container = styled.div`
+    margin-top: 30px;
+    margin-bottom: 30px;
+`
+
 export const BannerUploaderStyled = styled.img`
     width: 100%;
     max-width: 500px;

@@ -2,7 +2,8 @@ import no_image from "../../assets/no_image_event.png"
 import { 
     BannerUploaderStyled,
     LabelStyled,
-    ProfilePictureUploaderStyled
+    ProfilePictureUploaderStyled,
+    Container
  } from "./styles"
 
 type Props = {
@@ -44,7 +45,7 @@ export function ProfilePictureUploader({ image, setImage }:Props) {
     }
 
     return (
-        <div>
+        <Container>
             <LabelStyled htmlFor="profile-picture">
                 <ProfilePictureUploaderStyled 
                     src={ image? URL.createObjectURL(image) : no_image } 
@@ -53,6 +54,6 @@ export function ProfilePictureUploader({ image, setImage }:Props) {
 
             <input type="file" name="profile-picture" id="profile-picture" hidden={true}
                 onChange={handleImage} />
-        </div>
+        </Container>
     )
 }
