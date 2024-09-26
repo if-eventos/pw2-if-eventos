@@ -15,6 +15,7 @@ import { Container,
         SouPalestrante,
         CheckPalestrante,
         LabelPalestrante } from "./styles"
+import { ErrorMessage } from "../../components/ErrorMessage"
 
 import icon_email from "../../assets/icon_email.png"
 import icon_password from "../../assets/icon_password.png"
@@ -90,25 +91,40 @@ export default function Cadastro() {
                 <ProfilePictureUploader image={image} setImage={setImage} />
 
                 <InputStyled $iconPath={icon_profile} {...register("name")} placeholder="nome"  />
-                {errors.name?.message && <div>{errors.name.message}</div>}
+                <ErrorMessage>
+                    {errors.name?.message && <div>{errors.name.message}</div>}
+                </ErrorMessage>
+
 
                 <InputStyled $iconPath={icon_email} {...register("email")} placeholder="email" />
-                {errors.email?.message && <div>{errors.email.message}</div>}
+                <ErrorMessage>
+                    {errors.email?.message && <div>{errors.email.message}</div>}
+                </ErrorMessage>
                 
                 <InputStyled $iconPath={icon_phone} {...register("telefone")} placeholder="telefone" />
-                {errors.telefone?.message && <div>{errors.telefone.message}</div>}
-                
+                <ErrorMessage>
+                    {errors.telefone?.message && <div>{errors.telefone.message}</div>}
+                </ErrorMessage>
+
                 <InputStyled $iconPath={icon_site} {...register("urlsite")} placeholder="site pessoal:" />
-                {errors.urlsite?.message && <div>{errors.urlsite.message}</div>}
+                <ErrorMessage>
+                    {errors.urlsite?.message && <div>{errors.urlsite.message}</div>}
+                </ErrorMessage>
 
                 <InputStyled $iconPath={icon_redesocial} {...register("curriculo_redesocial")} placeholder="rede social" />
-                {errors.curriculo_redesocial?.message && <div>{errors.curriculo_redesocial.message}</div>}
-                
+                <ErrorMessage>
+                    {errors.curriculo_redesocial?.message && <div>{errors.curriculo_redesocial.message}</div>}
+                </ErrorMessage>
+
                 <InputStyled $iconPath={icon_password} {...register("password")} placeholder="senha" type="password"/>
-                {errors.password?.message && <div>{errors.password.message}</div>}
+                <ErrorMessage>
+                    {errors.password?.message && <div>{errors.password.message}</div>}
+                </ErrorMessage>
 
                 <TextAreaMinicurriculo {...register("minicurriculo")} placeholder="Escreva um pouco sobre você:" />
-                {errors.minicurriculo?.message && <div>{errors.minicurriculo.message}</div>}
+                <ErrorMessage>
+                    {errors.minicurriculo?.message && <div>{errors.minicurriculo.message}</div>}
+                </ErrorMessage>
 
                 <SouPalestrante>
                     <LabelPalestrante htmlFor="ehPalestrante">

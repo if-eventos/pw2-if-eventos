@@ -17,7 +17,7 @@ export const FormStyled = styled.form`
     flex-direction: column;
     align-items: center;
 
-    row-gap: 20px;
+    /* row-gap: 20px; */
 `
 
 export const Aviso = styled.div`

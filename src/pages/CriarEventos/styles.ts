@@ -15,7 +15,7 @@ export const Container = styled.div`
 `
 
 export const FormStyled = styled.form`
-    row-gap: 20px;
+    /* row-gap: 20px; */
     
     display: flex;
     flex-direction: column;

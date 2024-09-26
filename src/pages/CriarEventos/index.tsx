@@ -13,6 +13,7 @@ import { SubmitButton } from "../../components/Buttons"
 
 import { BannerUploader } from "../../components/ImageUploader"
 import { InputStyled } from "../../components/Input"
+import { ErrorMessage } from "../../components/ErrorMessage"
 
 import icon_map_pin from "../../assets/map-pin-bold.png"
 import icon_calendar from "../../assets/calendar-dots-bold.png"
@@ -74,20 +75,30 @@ export default function CriarEventos() {
                 <BannerUploader image={image} setImage={setImage} />
 
                 <InputStyled $iconPath={icon_map_pin} {...register("nome")} placeholder="nome"  />
-                {errors.nome?.message && <div>{errors.nome.message}</div>}
+                <ErrorMessage>
+                    {errors.nome?.message && <div>{errors.nome.message}</div>}
+                </ErrorMessage>
 
                 <InputStyled $iconPath={icon_clipboard} {...register("descricao")} placeholder="descricao" />
-                {errors.descricao?.message && <div>{errors.descricao.message}</div>}
+                <ErrorMessage>
+                    {errors.descricao?.message && <div>{errors.descricao.message}</div>}
+                </ErrorMessage>
                 
                 <InputStyled $iconPath={icon_calendar} type="date" {...register("data_hora")} placeholder="data_hora" />
-                {errors.data_hora?.message && <div>{errors.data_hora.message}</div>}
+                <ErrorMessage>
+                    {errors.data_hora?.message && <div>{errors.data_hora.message}</div>}
+                </ErrorMessage>
                 
                 <InputStyled $iconPath={icon_link} {...register("local_ou_link")} placeholder="local_ou_link" />
-                {errors.local_ou_link?.message && <div>{errors.local_ou_link.message}</div>}
-
+                <ErrorMessage>
+                    {errors.local_ou_link?.message && <div>{errors.local_ou_link.message}</div>}
+                </ErrorMessage>
+                
                 <InputStyled $iconPath={icon_graduation_cap} {...register("categoria")} placeholder="categoria" />
-                {errors.categoria?.message && <div>{errors.categoria.message}</div>}
-
+                <ErrorMessage>
+                    {errors.categoria?.message && <div>{errors.categoria.message}</div>}
+                </ErrorMessage>
+                
                 <SubmitButton>
                     Criar Evento!
                 </SubmitButton>

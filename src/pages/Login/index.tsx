@@ -10,6 +10,7 @@ import { LoginContainer,
          Text } from "./styles"
 import { InputStyled } from "../../components/Input"
 import { SubmitButton } from "../../components/Buttons"
+import { ErrorMessage } from "../../components/ErrorMessage"
 
 import icon_email from "../../assets/icon_email.png"
 import icon_password from "../../assets/icon_password.png"
@@ -50,14 +51,18 @@ export function Login() {
                 <InputStyled {...register("email")} 
                 placeholder="email" 
                 $iconPath={icon_email} />
-                {errors.email?.message && <div>{errors.email.message}</div>}
+                <ErrorMessage>
+                    {errors.email?.message && <div>{errors.email.message}</div>}
+                </ErrorMessage>
 
                 <InputStyled {...register("password")} 
                 placeholder="senha" 
                 type="password"
                 $iconPath={icon_password} />
-                {errors.password?.message && <div>{errors.password.message}</div>}
- 
+                <ErrorMessage>
+                    {errors.password?.message && <div>{errors.password.message}</div>}
+                </ErrorMessage>
+
                 <SubmitButton>
                     Login
                 </SubmitButton>
