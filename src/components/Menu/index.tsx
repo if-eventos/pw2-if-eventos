@@ -27,17 +27,17 @@ export default function Menu() {
   const [isOpen, setIsOpen] = useState(false)
   const width = useWindowWidth()
   
-    function handleLoginButton() {
-      navigate('/login')
-    }
-
-    function handleCadastroButton() {
-      navigate('/cadastro')
-    }
 
     function handleLogoutButton() {
       auth.deslogar()
-      navigate('/login')
+      handleRedirect('/login')
+    }
+
+    function handleRedirect(path:string) {
+      navigate(path)
+      if (isOpen) {
+        setIsOpen(!isOpen)
+      } 
     }
 
     return (
@@ -63,16 +63,16 @@ export default function Menu() {
                   !!auth.user ?
                     (
                       <>
-                        <PageButton callback={() => navigate('/')}>
+                        <PageButton callback={() => handleRedirect('/')}>
                           Home
                         </PageButton>
-                        <PageButton callback={() => navigate('/criarevento')}>
+                        <PageButton callback={() => handleRedirect('/criarevento')}>
                           criar evento
                         </PageButton>
-                        <PageButton callback={() => navigate('/inscricoes')}>
+                        <PageButton callback={() => handleRedirect('/inscricoes')}>
                           inscrições
                         </PageButton>
-                        <PageButton callback={() => navigate('/editar-perfil')}>
+                        <PageButton callback={() => handleRedirect('/editar-perfil')}>
                           Editar Perfil
                         </PageButton>
                       </>
@@ -96,10 +96,10 @@ export default function Menu() {
                     :
                     (
                       <>
-                      <LoginButton callback={handleLoginButton}>
+                      <LoginButton callback={() => handleRedirect("/login")}>
                         Login
                       </LoginButton>
-                      <CadastroButton callback={handleCadastroButton}>
+                      <CadastroButton callback={() => handleRedirect("/cadastro")}>
                         Cadastre-se
                       </CadastroButton>
                       </>
