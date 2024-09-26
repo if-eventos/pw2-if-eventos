@@ -35,3 +35,18 @@ export const EventDetails = styled.div`
     color: #555;
   }
 `;
+export const Botao = styled.button`
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
