@@ -85,6 +85,7 @@ export const CardInfo = styled.div`
 
 // Container da grade (layout responsivo)
 export const GridContainer = styled.div`
+  width: 90%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
