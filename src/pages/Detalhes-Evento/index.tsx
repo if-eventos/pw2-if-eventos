@@ -10,7 +10,6 @@ import {
   Description,
   JoinButton,
   LocationContainer,
-  MapImage,
   SpeakersContainer,
   SpeakerList,
   Title2,

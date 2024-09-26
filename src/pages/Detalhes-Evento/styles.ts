@@ -18,6 +18,14 @@ export const HeaderContainer = styled.header`
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const Image = styled.img`
@@ -25,6 +33,14 @@ export const Image = styled.img`
   max-height: 350px;
   object-fit: cover;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    max-height: 250px;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 180px;
+  }
 `;
 
 export const Date = styled.p`
@@ -32,7 +48,17 @@ export const Date = styled.p`
   color: #666;
   margin-top: 15px;
   text-align: left;
-  margin-left: 135px
+  margin-left: 135px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-left: 10px;
+  }
 
 `;
 
@@ -41,7 +67,18 @@ export const Title = styled.h1`
   color: #333;
   margin-top: 10px;
   text-align: left;
-  margin-left: 135px
+  margin-left: 135px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
 `;
 
 export const Title2 = styled.h1`
@@ -49,16 +86,42 @@ export const Title2 = styled.h1`
   color: #333;
   margin-top: 60px;
   text-align: left;
-  margin-left: 135px
+  margin-left: 135px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+    margin-left: 10px;
+  }
 `;
 
 export const globalContainer = styled.div`
-  max-width:70%
+  max-width:70%;
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 95%;
+  }
 `;
 
 // Event Details
 export const EventContainer = styled.section`
   margin: 20px 0;
+
+  @media (max-width: 768px) {
+    margin: 15px 0;
+  }
+
+  @media (max-width: 480px) {
+    margin: 10px 0;
+  }
 `;
 
 export const Description = styled.div`
@@ -67,7 +130,19 @@ export const Description = styled.div`
   line-height: 1.5;
   max-width: 70%;
   text-align: justify;
-  margin-left: 140px
+  margin-left: 140px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-left: 20px;
+    max-width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    margin-left: 10px;
+    max-width: 95%;
+  }
   
 `;
 
@@ -75,7 +150,12 @@ export const TitleButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0; /* Espaçamento opcional */
+  margin: 10px 0; 
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const JoinButton = styled.button`
@@ -93,15 +173,18 @@ export const JoinButton = styled.button`
   }
 
   @media (max-width: 768px) {
+    padding: 10px;
     font-size: 12px;
     width: 75px;
-    text-align: left;
+    text-align: center;
     margin-right: 10px;
     
   }
 
   @media (max-width: 480px) {
     font-size:12px;
+    padding: 10px;
+    margin: 10px;
 
   }
 
@@ -111,16 +194,16 @@ export const JoinButton = styled.button`
 export const LocationContainer = styled.section`
   margin: 20px 0;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin: 15px 0;
+  }
+
+  @media (max-width: 480px) {
+    margin: 10px 0;
+  }
 `;
 
-export const MapImage = styled.img`
-  width: 100%;
-  max-width: 600px;
-  height: 400px;
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0px 0px 6px 1px gray;
-`;
 
 // Speakers
 export const SpeakersContainer = styled.section`
