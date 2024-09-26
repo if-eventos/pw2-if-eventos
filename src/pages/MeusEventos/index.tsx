@@ -10,7 +10,12 @@ interface Evento {
   nome: string;
   descricao: string;
   data_hora: string;
-  urlsiteoficial: string;
+  local_ou_link: string;
+  longitude: string;
+  latitude: string;
+  createBy: number;
+  categoria: string;
+  image: string;
 }
 
 const MeusEventos: React.FC = () => {
@@ -25,10 +30,11 @@ const MeusEventos: React.FC = () => {
     const fetchEventos = async () => {
       if (user) {
         try {
-          const response = await api.get(`/api/v1/evento/user/${user.id}`);
-          console.log(response.data); // Log para verificação
+          const response = await api.get(`/api/v1/evento/teste/${user.id}`);
           if (response.data && response.data.eventos) {
-            setEventos(response.data.eventos);
+            const eventos = response.data.eventos as Evento[]
+            console.log(eventos); // Log para verificação
+            setEventos(eventos);
           }
         } catch (error) {
           console.error("Erro ao buscar eventos:", error);
@@ -46,14 +52,14 @@ const MeusEventos: React.FC = () => {
   }
 
   // Exibe um placeholder de carregamento enquanto os dados estão sendo buscados
-  if (loading) {
-    return <div>Carregando seus eventos...</div>;
-  }
+  // if (loading) {
+  //   return <div>Carregando seus eventos...</div>;
+  // }
 
   // Se não houver eventos, mostrar uma mensagem apropriada
-  if (!eventos.length) {
-    return <div>Você ainda não criou nenhum evento.</div>;
-  }
+  // if (!eventos.length) {
+  //   return <div>Você ainda não criou nenhum evento.</div>;
+  // }
 
   const handleEditEvent = () => {
     navigate('/editar-evento'); 
@@ -67,7 +73,7 @@ const MeusEventos: React.FC = () => {
             <h2>{evento.nome}</h2>
             <p>{evento.descricao}</p>
             <p>{new Date(evento.data_hora).toLocaleString()}</p>
-            <a href={evento.urlsiteoficial} target="_blank" rel="noopener noreferrer">Site Oficial</a>
+            <a href={evento.local_ou_link} target="_blank" rel="noopener noreferrer">Site Oficial</a>
             <Botao onClick={handleEditEvent}>Editar Evento</Botao>
           </div>
         ))}
