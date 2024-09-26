@@ -40,6 +40,10 @@ export default function Menu() {
       } 
     }
 
+    // function handleEditarPerfil(){
+    //   navigate('/perfil')
+    // }
+
     return (
       <Container>
         <LeftContent >
@@ -72,8 +76,11 @@ export default function Menu() {
                         <PageButton callback={() => handleRedirect('/inscricoes')}>
                           inscrições
                         </PageButton>
-                        <PageButton callback={() => handleRedirect('/editar-perfil')}>
-                          Editar Perfil
+                        <PageButton callback={() => navigate('/perfil')}>
+                          perfil
+                        </PageButton>
+                        <PageButton callback={() => navigate('/meus-eventos')}>
+                          eventos criados
                         </PageButton>
                       </>
                     ) :
