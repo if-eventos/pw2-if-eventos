@@ -63,7 +63,7 @@ export const EventContainer = styled.section`
 
 export const Description = styled.div`
   font-size: 16px;
-  color: #333;
+  color: #505050;
   line-height: 1.5;
   max-width: 70%;
   text-align: justify;
