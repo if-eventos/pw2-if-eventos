@@ -13,6 +13,8 @@ export const Container = styled.div`
     align-items: center;
 
     margin-bottom: 120px;
+
+    padding-top: 40px;
 `
 
 export const FormStyled = styled.form`
