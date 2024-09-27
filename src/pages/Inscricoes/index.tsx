@@ -3,6 +3,10 @@ import { api } from "../../api/axios";
 import { GridContainer } from "../../components/Evento/styles";
 import { Evento } from "../../components/Evento/Evento";
 import { Titulo } from "../../components/Titulo";
+import { 
+  NenhumEvento,
+  ContainerTitulo 
+} from "./styles.ts"
 
 interface Event {
     id: number;
@@ -42,20 +46,27 @@ export default function Inscricoes() {
         inscricoes.length > 0 
         ?
         (
-            <div>
-                <GridContainer>
-                    {inscricoes
-                    .map(event => (
-                      <Evento event={event} key={event.id}/>
-                    ))}
-                </GridContainer>
-            </div>
+          <>
+            <ContainerTitulo>
+                <Titulo>
+                  Suas inscrições:
+                </Titulo>
+            </ContainerTitulo>
+            <GridContainer>
+                {inscricoes
+                .map(event => (
+                  <Evento event={event} key={event.id}/>
+                ))}
+            </GridContainer>
+          </>
         ) 
         :
         (
+          <NenhumEvento>
             <Titulo>
               Você não se inscreveu em nenhum evento.
             </Titulo>
+          </NenhumEvento>
         )
     )
 }
