@@ -6,13 +6,13 @@ export const Container = styled.div`
     row-gap: 50px;
 
     width: 100%;
-    height: 80vh;
+    height: fit-content;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding-bottom: 200px;
+    margin-bottom: 120px;
 `
 
 export const FormStyled = styled.form`
