@@ -76,10 +76,10 @@ export default function Menu() {
                         <PageButton callback={() => handleRedirect('/inscricoes')}>
                           inscrições
                         </PageButton>
-                        <PageButton callback={() => navigate('/perfil')}>
+                        <PageButton callback={() => handleRedirect('/perfil')}>
                           perfil
                         </PageButton>
-                        <PageButton callback={() => navigate('/meus-eventos')}>
+                        <PageButton callback={() => handleRedirect('/meus-eventos')}>
                           eventos criados
                         </PageButton>
                       </>
