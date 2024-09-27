@@ -49,10 +49,6 @@ const EditarEvento: React.FC = () => {
         }
     };
 
-    // if (!evento) {
-    //     return <div>Carregando...</div>; // Exibir carregando enquanto os dados estão sendo buscados
-    // }
-
     return (
         <div>
             <HeaderContainer>

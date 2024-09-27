@@ -1,40 +1,25 @@
 import styled from 'styled-components';
 
-export const Header = styled.h1`
-  text-align: center;
-  margin: 20px 0;
-  color: #2f4b7c;
+export const EventosContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  gap: 20px; 
+  margin: 20px; 
 `;
 
-export const CardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
+// EventoWrapper
+export const EventoWrapper = styled.div`
+  flex: 1 1 calc(33.333% - 40px); 
+  box-sizing: border-box; 
+  max-width: 33.333%; 
+  min-width: 300px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
 `;
 
-export const Card = styled.div`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-
-  h3 {
-    color: #2f4b7c;
-    margin-bottom: 10px;
-  }
-`;
-
-export const EventDetails = styled.div`
-  p {
-    margin: 5px 0;
-    font-size: 14px;
-  }
-  strong {
-    color: #555;
-  }
-`;
+// Botão estilizado
 export const Botao = styled.button`
   cursor: pointer;
   padding: 10px 20px;
@@ -43,6 +28,9 @@ export const Botao = styled.button`
   border: none;
   border-radius: 5px;
   font-size: 16px;
+  margin-top: 10px; 
+  margin-left: auto; 
+  margin-right: auto; 
 
   transition: transform 0.2s;
 

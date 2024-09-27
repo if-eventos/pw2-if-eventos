@@ -1,31 +1,39 @@
-// styles.ts
 import styled from 'styled-components';
 
-export const SectionContainer = styled.div`
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-`;
-
-export const HeaderContainer = styled.div`
-  background-color: #2f4b7c;
-  padding: 30px;
-  color: white;
-  max-height: 150px;
+export const HeaderContainer = styled.header`
   text-align: center;
-  h1 {
-    margin: 0;
-  }
-  p {
-    margin-top: 10px;
-    font-size: 14px;
-  }
+  margin-bottom: 20px;
+  margin-top: 10px;
 `;
 
-export const SectionTitle = styled.h2`
-font-size: 30px;
-margin: 20px 0;
-margin-left: 80px;
+export const SectionContainer = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+`;
+
+export const SectionTitle = styled.div`
+  margin-bottom: 15px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  textarea {
+    resize: vertical; /* Permite redimensionar apenas na vertical */
+  }
 `;
 
 export const Botao = styled.button`
@@ -36,14 +44,12 @@ export const Botao = styled.button`
   border: none;
   border-radius: 5px;
   font-size: 16px;
+  margin-top: 10px;
+  width: 100%; // Botão ocupa toda a largura do contêiner
 
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-
-  transition: transform 0.2s;
+  transition: background-color 0.2s;
 
   &:hover {
-    transform: scale(1.1);
+    background-color: #0056b3; // Muda a cor ao passar o mouse
   }
 `;

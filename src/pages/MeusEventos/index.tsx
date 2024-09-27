@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { api } from '../../api/axios';
+import { Evento } from '../../components/Evento/Evento';
 import { Botao } from './styles';
+import { EventosContainer, EventoWrapper } from './styles';
 import { useNavigate } from 'react-router-dom'; 
 
 // Definindo a interface para os dados do evento
@@ -51,35 +53,24 @@ const MeusEventos: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  // Exibe um placeholder de carregamento enquanto os dados estão sendo buscados
-  // if (loading) {
-  //   return <div>Carregando seus eventos...</div>;
-  // }
-
-  // Se não houver eventos, mostrar uma mensagem apropriada
-  // if (!eventos.length) {
-  //   return <div>Você ainda não criou nenhum evento.</div>;
-  // }
-
   const handleEditEvent = (id: Number) => {
     navigate(`/editar-evento/${id}`); 
   };
   return (
     <div>
       <h1>Meus Eventos</h1>
-      <div className="eventos-container">
-        {eventos.map(evento => (
-          <div key={evento.id} className="evento-card">
-            <h2>{evento.nome}</h2>
-            <p>{evento.descricao}</p>
-            <p>{new Date(evento.data_hora).toLocaleString()}</p>
-            <a href={evento.local_ou_link} target="_blank" rel="noopener noreferrer">Site Oficial</a>
+      <EventosContainer>
+        {eventos.map((evento) => (
+          <EventoWrapper key={evento.id}>
+            <Evento event={evento} />
             <Botao onClick={() => handleEditEvent(evento.id)}>Editar Evento</Botao>
-          </div>
+          </EventoWrapper>
         ))}
-      </div>
+      </EventosContainer>
     </div>
   );
+  
+  
 };
 
 export default MeusEventos;
