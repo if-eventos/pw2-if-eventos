@@ -59,7 +59,7 @@ export default function Menu() {
         
 
         {
-          (width > 810 || isOpen) &&
+          (width > 938 || isOpen) &&
           (
             <ButtonsContainer>
               <PagesContainer>

@@ -39,7 +39,7 @@ export const PageButtonStyled = styled.button`
         background-color: #ebe7e0;
     }
 
-    @media (max-width: 810px) {
+    @media (max-width: 938px) {
 
         margin: 0px;
         width: 100%;

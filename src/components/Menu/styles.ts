@@ -10,7 +10,7 @@ export const Container = styled.div`
 
     background-color: #FFF;
 
-    @media (max-width: 810px) {
+    @media (max-width: 938px) {
       flex-flow: row wrap;
       height: max-content;
     }
@@ -22,7 +22,7 @@ export const LeftContent = styled.div`
   justify-content: space-around;
   padding-left: 89px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 938px) {
     padding-left: 0px;
   }
 `;
@@ -33,7 +33,7 @@ export const AuthContent = styled.div`
   justify-content: space-around;
   padding-right: 34px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 938px) {
     width: 100%;
     padding-right: 0px;
 
@@ -46,7 +46,7 @@ export const OpenMenu = styled.div`
 
   display: none;
 
-  @media (max-width: 810px) {
+  @media (max-width: 938px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,7 +71,7 @@ export const ButtonsContainer = styled.div`
   /* cursor: pointer; */
 
 
-  @media (max-width: 810px) {
+  @media (max-width: 938px) {
     width: 100%;
     flex-direction: column;
   }
@@ -89,7 +89,7 @@ export const PagesContainer = styled.div`
   cursor: pointer;
 
 
-  @media (max-width: 810px) {
+  @media (max-width: 938px) {
     width: 100%;
     background-color: bisque;
     flex-direction: column;
