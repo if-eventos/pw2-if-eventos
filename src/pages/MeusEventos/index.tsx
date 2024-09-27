@@ -61,8 +61,8 @@ const MeusEventos: React.FC = () => {
   //   return <div>Você ainda não criou nenhum evento.</div>;
   // }
 
-  const handleEditEvent = () => {
-    navigate('/editar-evento'); 
+  const handleEditEvent = (id: Number) => {
+    navigate(`/editar-evento/${id}`); 
   };
   return (
     <div>
@@ -74,7 +74,7 @@ const MeusEventos: React.FC = () => {
             <p>{evento.descricao}</p>
             <p>{new Date(evento.data_hora).toLocaleString()}</p>
             <a href={evento.local_ou_link} target="_blank" rel="noopener noreferrer">Site Oficial</a>
-            <Botao onClick={handleEditEvent}>Editar Evento</Botao>
+            <Botao onClick={() => handleEditEvent(evento.id)}>Editar Evento</Botao>
           </div>
         ))}
       </div>

@@ -4,26 +4,28 @@ import { api } from '../../api/axios';
 import { HeaderContainer, SectionContainer, SectionTitle, Botao } from './styles';
 
 const EditarEvento: React.FC = () => {
-    const { eventoId } = useParams<{ eventoId: string }>(); // Obtendo o ID do evento a ser editado
+    const { eventoId } = useParams(); 
+    // const { eventoId } = useParams<{ eventoId: string }>(); // Obtendo o ID do evento a ser editado
     const navigate = useNavigate(); // Para redirecionar após a edição
     const [evento, setEvento] = useState<any>(null); // Estado para armazenar os dados do evento
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [data_hora, setDataHora] = useState('');
-    const [urlsiteoficial, setUrlSiteOficial] = useState('');
+    const [local_ou_link, setlocal_ou_link] = useState('');
     const [categoria, setCategoria] = useState('');
+    const [image, setImage] = useState<File | undefined>(undefined); // Para manipular a imagem de perfil
+
 
     useEffect(() => {
         const fetchEvento = async () => {
             try {
-                const response = await api.get(`/api/v1/evento/${eventoId}`);
+                const response = await api.get(`/api/v1/evento/todos/${eventoId}`);
                 const eventoData = response.data.evento;
                 setEvento(eventoData);
                 setNome(eventoData.nome);
                 setDescricao(eventoData.descricao);
                 setDataHora(eventoData.data_hora);
-                setUrlSiteOficial(eventoData.urlsiteoficial);
-                setCategoria(eventoData.categoria);
+                setlocal_ou_link(eventoData.local_ou_link);
             } catch (error) {
                 console.error("Erro ao buscar evento:", error);
             }
@@ -36,8 +38,10 @@ const EditarEvento: React.FC = () => {
         e.preventDefault(); // Prevenir o comportamento padrão do formulário
 
         try {
-            const updatedEvento = { nome, descricao, data_hora, urlsiteoficial, categoria };
-            await api.put(`/api/v1/evento/${eventoId}`, updatedEvento);
+            const updatedEvento = { nome, descricao, data_hora, local_ou_link };
+            console.log(eventoId)
+            //const id = Number(eventoId)
+            await api.patch(`/api/v1/evento/atualize/${eventoId}`, updatedEvento);
             alert("Evento atualizado com sucesso!");
             navigate('/meus-eventos'); // Redirecionar após a atualização
         } catch (error) {
@@ -45,9 +49,9 @@ const EditarEvento: React.FC = () => {
         }
     };
 
-    if (!evento) {
-        return <div>Carregando...</div>; // Exibir carregando enquanto os dados estão sendo buscados
-    }
+    // if (!evento) {
+    //     return <div>Carregando...</div>; // Exibir carregando enquanto os dados estão sendo buscados
+    // }
 
     return (
         <div>
@@ -56,6 +60,8 @@ const EditarEvento: React.FC = () => {
             </HeaderContainer>
             <SectionContainer>
                 <form onSubmit={handleSubmit}>
+                    {/* <img src={`${api.getUri()}${evento.image}`} alt={evento.nome} /> */}
+
                     <SectionTitle>
                         <label>Nome:</label>
                         <input
@@ -89,17 +95,8 @@ const EditarEvento: React.FC = () => {
                         <label>URL do Site Oficial:</label>
                         <input
                             type="url"
-                            value={urlsiteoficial}
-                            onChange={(e) => setUrlSiteOficial(e.target.value)}
-                        />
-                    </SectionTitle>
-
-                    <SectionTitle>
-                        <label>Categoria:</label>
-                        <input
-                            type="text"
-                            value={categoria}
-                            onChange={(e) => setCategoria(e.target.value)}
+                            value={local_ou_link}
+                            onChange={(e) => setlocal_ou_link(e.target.value)}
                         />
                     </SectionTitle>
 

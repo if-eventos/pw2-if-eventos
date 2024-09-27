@@ -42,7 +42,7 @@ export function Router() {
                         <Route path='/inscricoes' element={<Inscricoes />} />
                         <Route path='/perfil' element={<Perfil />} />
                         <Route path='/meus-eventos' element={<MeusEventos />} />
-                        <Route path='/editar-evento' element={<EditarEvento />} />
+                        <Route path='/editar-evento/:eventoId' element={<EditarEvento />} />
                         </> // Substituir por pages que o usuario acessa quando esta logado
                     )
                 }
